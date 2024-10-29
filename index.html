@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Index Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
+<link href='https://fonts.googleapis.com/css?family=Overpass' rel='stylesheet'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.zoom {
+  
+  transition: transform .2s; /* Animation */
+}
+
+.zoom:hover {
+  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  font-family: Overpass;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  padding:25px 16px;
+  width:auto;
+  border:none;
+  display:block;
+  outline:0;
+  color: white;
+  cursor: pointer;
+  background-color: inherit;
+  font-family: Overpass;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+  background-color: inherit;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+
+body,h1,h2,h3,h4,h5,h6 {font-family: "Overpass", sans-serif;}
+body, html {
+  height: 100%;
+  color: dark-gray;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+/* Create a Parallax Effect */
+.bgimg-1, .bgimg-2, .bgimg-3, .bgimg-12 {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* First image (Logo. Full height) */
+.bgimg-1 {
+  background-image: url('images/slider11.jpg');
+  min-height: 100%;
+}
+.bgimg-12 {
+  background-image: url('images/slider22.jpg');
+  min-height: 500px;
+}
+
+/* Second image (Portfolio) */
+.bgimg-2 {
+  background-image: url("images/parallax2.jpg");
+  min-height: 500px;
+}
+
+/* Third image (Contact) */
+.bgimg-3 {
+  background-image: url("images/w1.png");
+  max-height: 200px;
+}
+
+.w4-wide {letter-spacing: 10px;}
+.w4-hover-opacity {cursor: pointer;}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1600px) {
+  .bgimg-1, .bgimg-2, .bgimg12 {
+    background-attachment: scroll;
+    min-height: 500px;
+  }
+}
+
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1600px) {
+   .bgimg-3{
+    background-attachment: scroll;
+    min-height: 300px;
+  }
+}
+
+.logo {
+  height: 12px;
+  width:18px;
+  
+}
+
+</style>
+</head>
+<body style="background-color:#cbe6ef;">
+
+<!-- Navbar (sit on top) -->
+
+<div class="w4-top">
+  <div class="w4-bar" id="myNavbar">
+	<img src="images/logo2.png" class="w4-bar-item " width="150px" height="70px" style="padding-top:3px;padding-bottom:3px;"> 
+
+    <a href="#home" class="w4-bar-item w4-button"><i class="fa fa-home"></i>HOME</a>
+	<a href="#portfolio" class="w4-bar-item w4-button w4-hide-small">PORTFOLIO</a>
+	<a href="#skills" class="w4-bar-item w4-button w4-hide-small">SKILLS</a>
+	<a href="gallery.html" class="w4-bar-item w4-button">GALLERY</a>
+    <a href="index.html#contact" class="w4-bar-item w4-button w4-hide-small">CONTACT</a>
+	
+	<div class="dropdown">
+	<button class="dropbtn" onclick="myFunction2()">PASSION ZONE<i class="fa fa-caret-down"></i></button>
+	<div class="dropdown-content" id="myDropdown">
+		<a href="about.html" >ABOUT</a>
+		<a href="INTERNSHIPS.html" >INTERNSHIP</a>
+		<a href="interests.html" >INTERESTS</a>
+		<a href="goals.html" >GOALS</a>
+	</div>
+	</div> 
+
+    <a href="#" class="w4-bar-item w4-button w4-hide-small w4-right w4-hover-red">
+      <i class="fa fa-search"></i>
+    </a>
+  </div>
+ </div>
+
+
+<!-- First Parallax Image with Logo Text -->
+<div class="bgimg-12 w4-display-container" id="home">
+<div class=" w4-display-topleft w4-light-grey" style="white-space:nowrap;margin-top:190px;margin-left: 50px;padding-bottom: 10px; padding-left:10px; padding-right:10px; padding-top:10px;">
+		<b><span class=" w4-padding-large w4-animate-opacity" style="font-size:24px; text-align:left;">Hello, I'm Mohammad Rashed. <br/> I am a highly skilled and motivated Data</br> Scientist.</span>
+	</b></br>
+	<a href="about.html" class="w4-button w4-blue-mine" style="margin-left:30%;"> More About Me  <i class="fa fa-arrow-right w4-margin-right"></i></a></div>
+	<div class="bgimg-1 w4-display-container w4-animate-fading" id="home">
+	<div class="w4-display-topleft w4-light-grey" style="white-space:nowrap;margin-top:190px;margin-left: 50px;padding-bottom: 10px; padding-left:10px; padding-right:10px; padding-top:10px;">
+		<b><span class=" w4-padding-large    w4-animate-opacity " style="font-size:24px; text-align:left;">Hello, I'm Mohammad Rashed. <br/> I am a highly skilled and motivated Data</br> Scientist.</span>
+	</b></br>
+	<a href="about.html" class="w4-button w4-blue-mine" style="margin-left:30%;"> More About Me  <i class="fa fa-arrow-right w4-margin-right"></i></a>
+	</div>
+	</div>
+</div>
+
+
+
+
+
+<!-- Container (Portfolio Section) -->
+<div class="w4-content w4-container w4-padding-64" id="portfolio" style="margin-top:25px; border-radius:30px">
+  <h3 class="w4-center" style="font-weight:bold; font-size:40px ;">MY WORK</h3>
+  <p class="w4-center"><em>These are some of the machine learning and deep leanring based projects on which I have recently worked upon.</em></p><br>
+
+  <div class="w4-row-padding w4-center">
+    <div class="w4-col m3 w4-black  w4-border-teal zoom  w4-opacity w4-hover-opacity-off" style="margin-left:7%; margin-right:55px; padding-bottom:5px; padding-right:1px"><p>Brain Tumor Segmentation</p>
+      <img src="images/brain 4.png" style="width:230px; height: 230px" onclick="onClick(this)" >
+    </div>
+	
+    <div class="w4-col m3 w4-black  w4-border-teal zoom  w4-opacity w4-hover-opacity-off" style="margin-right:55px; padding-bottom:5px; padding-right:1px"><p>Breast Cancer Segmentation</p>
+      <img src="images/breast2.png" style="width:230px; height: 230px" onclick="onClick(this)"  >
+    </div>
+
+    <div class="w4-col m3 w4-black  w4-border-teal zoom  w4-opacity w4-hover-opacity-off" style=" padding-bottom:5px; padding-right:1px"><p>Plants Disease Detection</p>
+      <img src="images/plant.jpg" style="width:230px; height: 230px" onclick="onClick(this)"  >
+    </div>
+	    
+  </div>
+
+  <div class="w4-row-padding w4-center w4-section">
+    <div class="w4-col m3 w4-black  w4-border-teal zoom  w4-opacity w4-hover-opacity-off" style="margin-left:7%; margin-right:55px; padding-bottom:5px; padding-right:1px"><p>Lungs Cancer Detection</p>
+      <img src="images/lungs.jpg" style="width:230px; height: 230px" onclick="onClick(this)" >
+    </div>
+	
+    <div class="w4-col m3 w4-black  w4-border-teal zoom  w4-opacity w4-hover-opacity-off" style="margin-right:55px; padding-bottom:5px; padding-right:1px"><p>Face Recognition</p>
+      <img src="images/face.jpg" style="width:230px; height: 230px" onclick="onClick(this)"  >
+    </div>
+
+    <div class="w4-col m3 w4-black  w4-border-teal zoom  w4-opacity w4-hover-opacity-off" style=" padding-bottom:5px; padding-right:1px"><p>Covid-19 Disease Diagnosis</p>
+      <img src="images/covid2.png" style="width:230px; height: 230px" onclick="onClick(this)"  >
+    </div>
+    <button class="w4-button w4-padding-large w4-light-grey" style="margin-top:64px">LOAD MORE</button>
+  </div>
+</div>
+
+
+ <div class="w4-content w4-container w4-padding-64" id="skills">
+    <h3 class="w4-center" style="font-weight:bold; font-size:40px ; padding-top: 20px;">MY SKILLS</h3>
+  <p class="w4-large">Programming Languages (Python, R and SQL)</p>
+  <div class="w4-light-grey">
+    <div class="w4-container w4-padding-small w4-blue-mine w4-center w4-hover-animate-fading" style="width:95%">95%</div>
+  </div>
+  <p class="w4-large">Machine Learning (Supervised, Unsupervised, Reinforcement Learning)</p>
+  <div class="w4-light-grey">
+    <div class="w4-container w4-padding-small w4-blue-mine w4-center w4-hover-animate-fading" style="width:90%">90%</div>
+  </div>
+  <p class="w4-large">Data Manipulation, Cleaning and Visualization</p>
+  <div class="w4-light-grey">
+    <div class="w4-container w4-padding-small w4-blue-mine w4-center w4-hover-animate-fading" style="width:90%">90%</div>
+  </div>
+  <p class="w4-large">Data Labeling</p>
+  <div class="w4-light-grey">
+    <div class="w4-container w4-padding-small w4-blue-mine w4-center w4-hover-animate-fading" style="width:98%">98%</div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal for full size images on click-->
+<div id="modal01" class="w4-modal w4-black" onclick="this.style.display='none'">
+  <span class="w4-button w4-large w4-black w4-display-topright" title="Close Modal Image"><i class="fa fa-remove"></i></span>
+  <div class="w4-modal-content w4-animate-zoom w4-center w4-transparent w4-padding-64">
+    <img id="img01" class="w4-image">
+    <p id="caption" class="w4-opacity w4-large"></p>
+  </div>
+</div>
+
+<!-- Third Parallax Image with Portfolio Text -->
+<div class="bgimg-3 w4-container  w4-opacity-min">
+  <div style="margin-left:45%; padding-top:110px;">
+     <span class="w4-xxlarge w4-text-white" >CONTACT</span>
+  </div>
+</div>
+
+<!-- Container (Contact Section) -->
+<div class="w4-content w4-container w4-padding-64" id="contact">
+  <h3 class="w4-center" style="font-weight:bold; font-size:40px ;">CONTACT DETAILS</h3>
+  <p class="w4-center"><em>I'd love your feedback!</em></p>
+
+  <div class="w4-row w4-padding-32 w4-section">
+    <div class="w4-col m4 w4-container">
+      <img src="images/contact.jpg" class="w4-image w4-round w4-opacity w4-hover-opacity-off" style="width:100%;height: 280px;">
+    </div>
+    <div class="w4-col m8 w4-panel">
+      <div class="w4-large w4-margin-bottom">
+        <i class="fa fa-map-marker fa-fw w4-hover-text-black w4-xlarge w4-margin-right"></i> Australia<br>
+        <i class="fa fa-phone fa-fw w4-hover-text-black w4-xlarge w4-margin-right"></i> Phone: +61 475863581<br>
+        <i class="fa fa-envelope fa-fw w4-hover-text-black w4-xlarge w4-margin-right"></i> Email: shoikot.dhk@gmail.com<br>
+      </div>
+      <form action="/action_page.php" target="_blank">
+        <div class="w4-row-padding" style="margin:0 -16px 8px -16px">
+          <div class="w4-half">
+            <input class="w4-input w4-border" type="text" placeholder="Name" required name="Name">
+          </div>
+          <div class="w4-half">
+            <input class="w4-input w4-border" type="text" placeholder="Email" required name="Email">
+          </div>
+        </div>
+        <input class="w4-input w4-border" type="text" placeholder="Message" required name="Message">
+        <button class="w4-button w4-blue-mine w4-right w4-section" type="submit">
+          <i class="fa fa-paper-plane"></i> SEND MESSAGE
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="w4-center w4-blue-mine w4-padding-16 w4-hover-opacity-off">
+  <a href="#home" class="w4-button w4-light-grey"><i class="fa fa-arrow-up w4-margin-right"></i>To the top</a>
+  <div class="w4-xlarge w4-section">
+    <i class="fa fa-facebook-official w4-hover-opacity"></i>
+    <i class="fa fa-instagram w4-hover-opacity"></i>
+    <i class="fa fa-snapchat w4-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w4-hover-opacity"></i>
+    <i class="fa fa-twitter w4-hover-opacity"></i>
+    <i class="fa fa-linkedin w4-hover-opacity"></i>
+  </div>
+<p style="
+    margin-bottom: -15px;
+    margin-top: -10px;
+"> This is my Digital portfolio @2023. All Rights Reserved.</p>
+</footer>
+ 
+<script>
+
+// Change style of navbar on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    var navbar = document.getElementById("myNavbar");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+		document.getElementById("myDropdown").className.replace("show dropdown-content", "dropdown-content");
+    } else {
+        navbar.className = navbar.className.replace(" w4-card w4-animate-top w4-white", "");
+    }
+}
+
+
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction2() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+  }
+}  
+
+
+
+
+window.onscroll = function() {myFunction3()};
+
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+function myFunction3() {
+if (window.pageYOffset >= sticky) {
+navbar.classList.add("sticky")
+} else {
+navbar.classList.remove("sticky");
+}
+}
+</script>
+
+</body>
+</html>
