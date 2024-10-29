@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Interests</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
+<link href='https://fonts.googleapis.com/css?family=Overpass' rel='stylesheet'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+.zoom {
+  
+  transition: transform .2s; /* Animation */
+}
+
+.zoom:hover {
+  transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  
+  background-color:white;
+  padding-left:25px;
+}
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  font-family: Overpass;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  padding:25px 16px;
+  width:auto;
+  border:none;
+  display:block;
+  outline:0;
+  color: white;
+  cursor: pointer;
+  background-color: inherit;
+  font-family: Overpass;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+  background-color: inherit;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+
+body,h1,h2,h3,h4,h5,h6 {font-family: "Overpass", sans-serif;}
+body, html {
+  height: 100%;
+  color: dark-gray;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+/* Create a Parallax Effect */
+.bgimg-1, .bgimg-2, .bgimg-3 {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* First image (Logo. Full height) */
+.bgimg-1 {
+  background-image: url('images/parallax7.jpg');
+  min-height: 100%;
+}
+
+/* Second image (Portfolio) */
+.bgimg-2 {
+  background-image: url("images/parallax2.jpg");
+  min-height: 400px;
+}
+
+/* Third image (Contact) */
+.bgimg-3 {
+  background-image: url("images/parallax6.jpg");
+  min-height: 400px;
+}
+
+.w4-wide {letter-spacing: 10px;}
+.w4-hover-opacity {cursor: pointer;}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1600px) {
+  .bgimg-1, .bgimg-2, .bgimg-3 {
+    background-attachment: scroll;
+    min-height: 400px;
+  }
+}
+</style>
+</head>
+<body style="background-color:#cbe6ef;">
+
+<!-- Navbar (sit on top) -->
+
+<div class="w4-top">
+  <div class="w4-bar" id="myNavbar">
+    <img src="images/logo2.png" class="w4-bar-item " width="150px" height="70px" style="padding-top:3px;padding-bottom:3px;"> 
+    <a href="index.html#home" class="w4-bar-item w4-button"><i class="fa fa-home"></i>HOME</a>
+	<a href="index.html#portfolio" class="w4-bar-item w4-button w4-hide-small">PORTFOLIO</a>
+	<a href="index.html#skills" class="w4-bar-item w4-button w4-hide-small">SKILLS</a>
+	<a href="gallery.html" class="w4-bar-item w4-button">GALLERY</a>
+    <a href="index.html#contact" class="w4-bar-item w4-button w4-hide-small">CONTACT</a>
+	
+	<div class="dropdown">
+	<button class="dropbtn" onclick="myFunction2()">MORE<i class="fa fa-caret-down"></i></button>
+	<div class="dropdown-content" id="myDropdown">
+		<a href="about.html" >ABOUT</a>
+		<a href="INTERNSHIPS.html" >INTERNSHIP</a>
+		<a href="interests.html" >INTERESTS</a>
+		<a href="goals.html" >GOALS</a>
+	</div>
+	</div> 
+
+    <a href="#" class="w4-bar-item w4-button w4-hide-small w4-right w4-hover-red">
+      <i class="fa fa-search"></i>
+    </a>
+  </div>
+ </div>
+
+
+
+<!-- Menu Section -->
+  <div class="w4-container w4-padding-64" style="padding-top:5%;padding-left:10%;padding-right:10%; " id="menu">
+    <div class="w4-col l6 w4-padding-large" style="background-color:white; margin-top:3%; border-radius:20px">
+      <h1 class="w4-center" style="color:#245894;">Interests</h1><br>
+	  <div class="zoom">
+      <h4 style="color:#245894;">Programming</h4>
+      <p >I have a passion for coding and programming, often in languages such as Python, R, or SQL, to manipulate and analyze data.</p><br>
+		</div>
+		<div class="zoom">
+      <h4 style="color:#245894;">Exploring Datasets</h4>
+      <p >I enjoy the process of exploring datasets, finding patterns, and creating compelling visualizations to communicate insights effectively.</p><br>
+		</div>
+		<div class="zoom">
+      <h4 style="color:#245894;">Deploying New models</h4>
+      <p >I have a keen interest in building and fine-tuning machine learning models to predict outcomes, classify data, or identify patterns within datasets</p><br>
+		</div>
+		<div class="zoom">
+      <h4 style="color:#245894;">Writing</h4>
+      <p >I like writing research papers, book chapters and propsals.</p><br>
+		</div>
+   </div>
+    
+    <div class="w4-col l6 w4-padding-large w4-hover-animate-fading" style="margin-top:2%">
+      <img src="images/3.jpg" class="w3-round w3-image" alt="Menu" style="width:100%">
+    </div>
+  </div>
+
+
+<script>
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
+// Change style of navbar on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    var navbar = document.getElementById("myNavbar");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        navbar.className = "w4-bar" + " w4-card" + " w4-animate-top";
+    } else {
+        navbar.className = navbar.className.replace(" w4-card w4-animate-top w4-white", "");
+    }
+}
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function toggleFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w4-show") == -1) {
+        x.className += " w4-show";
+    } else {
+        x.className = x.className.replace(" w4-show", "");
+    }
+}
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction2() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+  }
+}  
+</script>
+
+</body>
+</html>

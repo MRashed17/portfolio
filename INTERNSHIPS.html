@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Internships</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
+<link href='https://fonts.googleapis.com/css?family=Overpass' rel='stylesheet'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.zoom {
+  
+  transition: transform .2s; /* Animation */
+}
+
+.zoom:hover {
+  transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  
+  background-color:white;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  font-family: Overpass;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  padding:25px 16px;
+  width:auto;
+  border:none;
+  display:block;
+  outline:0;
+  color: white;
+  cursor: pointer;
+  background-color: inherit;
+  font-family: Overpass;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+  background-color: inherit;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+
+body,h1,h2,h3,h4,h5,h6 {font-family: "Overpass", sans-serif;}
+body, html {
+  height: 100%;
+  color: dark-gray;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+/* Create a Parallax Effect */
+.bgimg-1, .bgimg-2, .bgimg-3 {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* First image (Logo. Full height) */
+.bgimg-1 {
+  background-image: url('images/parallax7.jpg');
+  min-height: 100%;
+}
+
+/* Second image (Portfolio) */
+.bgimg-2 {
+  background-image: url("images/parallax2.jpg");
+  min-height: 400px;
+}
+
+/* Third image (Contact) */
+.bgimg-3 {
+  background-image: url("images/parallax6.jpg");
+  min-height: 400px;
+}
+
+.w4-wide {letter-spacing: 10px;}
+.w4-hover-opacity {cursor: pointer;}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1600px) {
+  .bgimg-1, .bgimg-2, .bgimg-3 {
+    background-attachment: scroll;
+    min-height: 400px;
+  }
+}
+</style>
+</head>
+<body style="background-color:#cbe6ef;">
+
+<!-- Navbar (sit on top) -->
+
+<div class="w4-top" >
+  <div class="w4-bar" id="myNavbar">
+    <img src="images/logo2.png" class="w4-bar-item " width="150px" height="70px" style="padding-top:3px;padding-bottom:3px;"> 
+    <a href="index.html#home" class="w4-bar-item w4-button"><i class="fa fa-home"></i>HOME</a>
+<a href="index.html#portfolio" class="w4-bar-item w4-button w4-hide-small">PORTFOLIO</a>
+	<a href="index.html#skills" class="w4-bar-item w4-button w4-hide-small">SKILLS</a>
+	<a href="gallery.html" class="w4-bar-item w4-button">GALLERY</a>
+    <a href="index.html#contact" class="w4-bar-item w4-button w4-hide-small">CONTACT</a>
+	
+	<div class="dropdown">
+	<button class="dropbtn" onclick="myFunction2()">MORE<i class="fa fa-caret-down"></i></button>
+	<div class="dropdown-content" id="myDropdown">
+		<a href="about.html" >ABOUT</a>
+		<a href="INTERNSHIPS.html" >INTERNSHIP</a>
+		<a href="interests.html" >INTERESTS</a>
+		<a href="goals.html" >GOALS</a>
+	</div>
+	</div> 
+
+    <a href="#" class="w4-bar-item w4-button w4-hide-small w4-right w4-hover-red">
+      <i class="fa fa-search"></i>
+    </a>
+  </div>
+ </div>
+
+
+
+<div class="w4-container " style="padding-top:5%;padding-left:20%;padding-right:20%; margin-top:5%;">
+      <div class="w4-container w4-card w4-white w4-margin-bottom">
+        <h2 class="w4-text-grey w4-padding-16"><i class="fa fa-suitcase fa-fw w4-margin-right w4-xxlarge w4-text-teal"></i>Internships</h2>
+        <div class="w4-container zoom">
+          <h5 class="w4-opacity"><b>Web Designing / Site for Sore Eyes</b></h5>
+          <h6 class="w4-text-teal"><i class="fa fa-calendar fa-fw w4-margin-right"></i>Jan 2021 - <span class="w4-tag w4-teal w4-round">Current</span></h6>
+          <hr>
+        </div>
+        <div class="w4-container zoom">
+          <h5 class="w4-opacity"><b>Artificial Intelligence Internship / Nexols Lahoree</b></h5>
+          <h6 class="w4-text-teal"><i class="fa fa-calendar fa-fw w4-margin-right"></i>Mar 2018 - Dec 2020</h6>
+          <p>In this internship, I have applied theoretical knowledge gained during academic studies to real-world scenarios. Gain hands-on experience in implementing AI algorithms and techniques.</p>
+          <hr>
+        </div>
+        <div class="w4-container zoom">
+          <h5 class="w4-opacity"><b>Machine Learning Engineer / SkyElectric Pvt. Ltd</b></h5>
+          <h6 class="w4-text-teal"><i class="fa fa-calendar fa-fw w4-margin-right"></i>Jun 2016 - Mar 2018</h6>
+          <p>To immerse myself in a rich learning experience, apply my skills to tangible projects, and contribute to the advancement of cutting-edge technology. </p><br>
+        </div>
+      </div>
+</div>
+
+<script>
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
+// Change style of navbar on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    var navbar = document.getElementById("myNavbar");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        navbar.className = "w4-bar" + " w4-card" + " w4-animate-top";
+    } else {
+        navbar.className = navbar.className.replace(" w4-card w4-animate-top w4-white", "");
+    }
+}
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function toggleFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w4-show") == -1) {
+        x.className += " w4-show";
+    } else {
+        x.className = x.className.replace(" w4-show", "");
+    }
+}
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction2() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+  }
+}  
+</script>
+
+</body>
+</html>
