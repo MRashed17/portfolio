@@ -1,65 +1,531 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mohammad Rashed - Portfolio</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohammad Rashed — IT Professional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:#06080b; --s1:#0c1018; --s2:#121820; --s3:#1a2230;
+      --lime:#c8ff00; --cyan:#00d4ff; --orange:#ff5c2b;
+      --text:#dfe6ef; --muted:#5a6778; --dim:#1e2a3a;
+      --sw:300px;
+      --head:'Archivo Black',sans-serif;
+      --body:'Archivo',sans-serif;
+      --mono:'DM Mono',monospace;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--body);display:flex;min-height:100vh}
+    ::-webkit-scrollbar{width:3px}
+    ::-webkit-scrollbar-track{background:var(--bg)}
+    ::-webkit-scrollbar-thumb{background:var(--lime)}
+
+    /* SIDEBAR */
+    .sidebar{width:var(--sw);position:fixed;top:0;left:0;bottom:0;background:var(--s1);display:flex;flex-direction:column;z-index:200;overflow:hidden}
+    .sidebar::after{content:'';position:absolute;top:0;left:0;width:24px;height:24px;border-top:2px solid var(--lime);border-left:2px solid var(--lime);pointer-events:none}
+    .sb-top{padding:2.5rem 2rem 2rem;border-bottom:1px solid var(--dim);position:relative}
+    .sb-top::after{content:'';position:absolute;bottom:-1px;right:0;width:16px;height:16px;border-bottom:1px solid var(--lime);border-right:1px solid var(--lime)}
+    .profile-wrap{position:relative;width:90px;height:90px;margin-bottom:1.25rem}
+    .profile-pic{width:90px;height:90px;object-fit:cover;display:block;filter:grayscale(25%) contrast(1.1);clip-path:polygon(0 0,85% 0,100% 15%,100% 100%,15% 100%,0 85%)}
+    .profile-wrap::before,.profile-wrap::after{content:'';position:absolute;width:12px;height:12px}
+    .profile-wrap::before{top:-4px;left:-4px;border-top:2px solid var(--lime);border-left:2px solid var(--lime)}
+    .profile-wrap::after{bottom:-4px;right:-4px;border-bottom:2px solid var(--lime);border-right:2px solid var(--lime)}
+    .sb-name{font-family:var(--head);font-size:1.2rem;letter-spacing:.04em;color:var(--text);line-height:1.15}
+    .sb-name span{color:var(--lime)}
+    .sb-role{font-family:var(--mono);font-size:9.5px;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;margin-top:.35rem;display:flex;align-items:center;gap:.4rem}
+    .sb-role::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--lime);box-shadow:0 0 6px var(--lime);animation:blink 2s ease-in-out infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+    .sb-location{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.1em;margin-top:.25rem;opacity:.6}
+    .sb-nav{flex:1;padding:1.5rem 0;overflow-y:auto}
+    .sb-nav a{display:flex;align-items:center;height:44px;text-decoration:none;position:relative;transition:background .2s}
+    .nav-num{font-family:var(--mono);font-size:9px;color:var(--lime);opacity:.3;letter-spacing:.1em;width:2.5rem;text-align:right;padding-right:.6rem;flex-shrink:0;transition:opacity .2s}
+    .nav-bar{width:2px;height:100%;background:var(--dim);flex-shrink:0;transition:background .2s,width .2s,box-shadow .2s}
+    .nav-label{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;padding-left:1rem;transition:color .2s}
+    .sb-nav a:hover .nav-bar,.sb-nav a.active .nav-bar{background:var(--lime);width:3px;box-shadow:0 0 8px var(--lime)}
+    .sb-nav a:hover .nav-label,.sb-nav a.active .nav-label{color:var(--text)}
+    .sb-nav a:hover .nav-num,.sb-nav a.active .nav-num{opacity:1}
+    .sb-foot{padding:1.5rem 2rem;border-top:1px solid var(--dim)}
+    .sb-foot p{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.08em;margin-bottom:.75rem;opacity:.5}
+    .sb-email{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--bg);background:var(--lime);padding:.55rem 1rem;text-decoration:none;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));transition:opacity .2s,transform .2s}
+    .sb-email:hover{opacity:.85;transform:translateX(3px)}
+
+    /* MAIN */
+    .main{margin-left:var(--sw);flex:1;min-width:0}
+
+    /* SLIDER */
+    .slider{position:relative;height:100vh;overflow:hidden}
+    .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease}
+    .slide::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(6,8,11,.97) 0%,rgba(6,8,11,.75) 55%,rgba(6,8,11,.2) 100%)}
+    .slide::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.04) 3px,rgba(0,0,0,.04) 4px);pointer-events:none}
+    .slide.active{opacity:1}
+    .slide-inner{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:0 4rem 4.5rem;z-index:2}
+    .slide-tag{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem}
+    .slide-tag::before{content:'';display:inline-block;width:30px;height:1px;background:var(--lime)}
+    .slide-h1{font-family:var(--head);font-size:clamp(2.8rem,5.5vw,5rem);line-height:.93;letter-spacing:-.01em;color:var(--text);max-width:680px}
+    .slide-h1 em{font-style:normal;color:var(--lime);display:block}
+    .slide-sub{margin-top:1.25rem;font-size:.88rem;color:rgba(223,230,239,.45);max-width:380px;line-height:1.7;font-weight:300}
+    .slide-dots{position:absolute;right:3rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;z-index:10}
+    .slide-dot{width:2px;height:24px;background:var(--dim);cursor:pointer;transition:all .35s}
+    .slide-dot.active{height:48px;background:var(--lime);box-shadow:0 0 10px rgba(200,255,0,.5)}
+    .slider-controls{position:absolute;bottom:3rem;right:3rem;display:flex;z-index:10}
+    .slider-controls span{width:46px;height:46px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);font-size:1.1rem;border:1px solid var(--dim);transition:all .2s;user-select:none}
+    .slider-controls span:hover{color:var(--lime);border-color:var(--lime);background:rgba(200,255,0,.04)}
+    .slider-controls .prev{border-right:none}
+    .slide-progress{position:absolute;bottom:0;left:0;height:2px;background:var(--lime);width:0;z-index:10;transition:width 0s}
+    .slide-progress.running{transition:width 5s linear;width:100%}
+
+    /* SECTIONS */
+    .section{padding:6rem 4rem;border-bottom:1px solid var(--dim);position:relative}
+    .section::before{content:'';position:absolute;top:2rem;left:2rem;width:14px;height:14px;border-top:1px solid var(--lime);border-left:1px solid var(--lime);opacity:.3}
+    .sec-eyebrow{font-family:var(--mono);font-size:9.5px;color:var(--lime);letter-spacing:.25em;text-transform:uppercase;margin-bottom:.4rem}
+    .sec-title{font-family:var(--head);font-size:clamp(2rem,3.5vw,3rem);letter-spacing:.01em;line-height:1;color:var(--text);margin-bottom:3rem}
+
+    /* ABOUT */
+    #about{background:var(--bg)}
+    .about-layout{display:grid;grid-template-columns:1.5fr 1fr;gap:4rem;align-items:start}
+    .about-body p{font-size:.93rem;color:rgba(223,230,239,.65);line-height:1.85;font-weight:300;margin-bottom:1rem}
+    .about-body p strong{color:var(--text);font-weight:500}
+    .about-links{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem}
+    .about-link{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--dim);padding:.45rem .9rem;text-decoration:none;transition:all .2s}
+    .about-link:hover{color:var(--lime);border-color:var(--lime);background:rgba(200,255,0,.03)}
+    .stat-panel{border:1px solid var(--dim);overflow:hidden}
+    .stat-row{display:flex;align-items:stretch;border-bottom:1px solid var(--dim)}
+    .stat-row:last-child{border-bottom:none}
+    .stat-key{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:1rem;border-right:1px solid var(--dim);width:110px;flex-shrink:0;display:flex;align-items:center;background:var(--s1)}
+    .stat-val{padding:1rem 1.25rem;display:flex;align-items:center}
+    .stat-big{font-family:var(--head);font-size:2rem;color:var(--lime);line-height:1}
+    .stat-small{font-family:var(--mono);font-size:11px;color:var(--text);letter-spacing:.05em}
+
+    /* EXPERTISE */
+    #expertise{background:var(--s1)}
+    .exp-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+    .exp-card{padding:2rem 1.75rem;border-right:1px solid var(--dim);border-bottom:1px solid var(--dim);position:relative;overflow:hidden;transition:background .25s}
+    .exp-card:nth-child(3n){border-right:none}
+    .exp-card:nth-last-child(-n+3){border-bottom:none}
+    .exp-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,255,0,.03) 0%,transparent 60%);opacity:0;transition:opacity .3s}
+    .exp-card:hover{background:var(--s2)}
+    .exp-card:hover::after{opacity:1}
+    .exp-num{font-family:var(--mono);font-size:8.5px;color:var(--lime);letter-spacing:.2em;opacity:.4;margin-bottom:1.5rem}
+    .exp-title{font-family:var(--head);font-size:1.15rem;letter-spacing:.04em;color:var(--text);margin-bottom:.6rem;line-height:1.2}
+    .exp-desc{font-size:.8rem;color:var(--muted);line-height:1.7;font-weight:300}
+    .exp-tools{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:1rem}
+    .exp-tool{font-family:var(--mono);font-size:8.5px;letter-spacing:.08em;color:var(--lime);opacity:.6;background:rgba(200,255,0,.05);padding:2px 7px;border-radius:1px}
+
+    /* SKILLS */
+    #skills{background:var(--bg)}
+    .skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--dim)}
+    .skill-block{padding:1.4rem 1.75rem;border-bottom:1px solid var(--dim);border-right:1px solid var(--dim);position:relative}
+    .skill-block:nth-child(2n){border-right:none}
+    .skill-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.6rem}
+    .skill-name{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text)}
+    .skill-pct{font-family:var(--head);font-size:1.5rem;line-height:1;color:var(--lime)}
+    .skill-track{height:1px;background:var(--dim);position:relative;margin-bottom:.6rem}
+    .skill-fill{position:absolute;top:-1px;left:0;height:3px;width:0;background:var(--lime);transition:width 1.5s cubic-bezier(.16,1,.3,1)}
+    .skill-fill.alt{background:var(--cyan)}
+    .skill-fill.alt2{background:var(--orange)}
+    .skill-chips{display:flex;flex-wrap:wrap;gap:.25rem}
+    .chip{font-family:var(--mono);font-size:8.5px;letter-spacing:.05em;color:var(--muted);padding:1px 6px;background:var(--s1);border:1px solid var(--dim)}
+
+    /* EDUCATION */
+    #education{background:var(--s1)}
+    .edu-list{display:flex;flex-direction:column;gap:0}
+    .edu-item{display:grid;grid-template-columns:160px 1fr;border:1px solid var(--dim);border-bottom:none;transition:background .2s}
+    .edu-item:last-child{border-bottom:1px solid var(--dim)}
+    .edu-item:hover{background:var(--s2)}
+    .edu-year-col{padding:1.5rem 1.25rem;border-right:1px solid var(--dim);background:var(--s2);display:flex;flex-direction:column;justify-content:center}
+    .edu-badge{display:inline-block;font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);border:1px solid rgba(255,92,43,.3);padding:2px 6px;margin-bottom:.5rem;align-self:flex-start}
+    .edu-years{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.08em}
+    .edu-content{padding:1.5rem 1.75rem}
+    .edu-title{font-family:var(--head);font-size:1.1rem;letter-spacing:.04em;color:var(--text);margin-bottom:.2rem}
+    .edu-institution{font-size:.82rem;color:var(--muted);margin-bottom:.6rem}
+    .edu-notes{font-size:.78rem;color:rgba(90,103,120,.8);line-height:1.6;font-weight:300}
+
+    /* EXPERIENCE */
+    #experience{background:var(--bg)}
+    .xp-item{display:grid;grid-template-columns:200px 1fr;border:1px solid var(--dim);border-bottom:none;transition:background .2s}
+    .xp-item:last-child{border-bottom:1px solid var(--dim)}
+    .xp-item:hover{background:rgba(26,34,48,.4)}
+    .xp-left{padding:2rem 1.5rem;border-right:1px solid var(--dim);background:var(--s1);display:flex;flex-direction:column;justify-content:flex-start}
+    .xp-type{font-family:var(--mono);font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--lime);opacity:.5;margin-bottom:.4rem}
+    .xp-period{font-family:var(--mono);font-size:9.5px;color:var(--muted);letter-spacing:.08em;margin-bottom:.5rem}
+    .xp-co{font-size:.8rem;color:var(--text);font-weight:500;line-height:1.3;margin-bottom:.3rem}
+    .xp-loc{font-family:var(--mono);font-size:8.5px;color:var(--muted);letter-spacing:.08em;opacity:.6}
+    .xp-right{padding:2rem}
+    .xp-role{font-family:var(--head);font-size:1.3rem;letter-spacing:.04em;color:var(--text);margin-bottom:.75rem}
+    .xp-bullets{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+    .xp-bullets li{font-size:.82rem;color:rgba(223,230,239,.55);line-height:1.65;font-weight:300;display:flex;gap:.6rem}
+    .xp-bullets li::before{content:'→';color:var(--lime);opacity:.5;flex-shrink:0;font-size:.75rem;margin-top:.1rem}
+    .xp-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:1rem}
+    .xp-tag{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--dim);padding:2px 7px}
+
+    /* PROJECT */
+    #project{background:var(--s1)}
+    .project-card{border:1px solid var(--dim);display:grid;grid-template-columns:1fr 1fr;overflow:hidden;transition:border-color .2s}
+    .project-card:hover{border-color:rgba(200,255,0,.25)}
+    .proj-body{padding:2.5rem;border-right:1px solid var(--dim)}
+    .proj-badge{font-family:var(--mono);font-size:8.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(0,212,255,.2);padding:3px 9px;display:inline-block;margin-bottom:1.25rem}
+    .proj-title{font-family:var(--head);font-size:1.5rem;letter-spacing:.03em;color:var(--text);margin-bottom:.75rem;line-height:1.2}
+    .proj-desc{font-size:.85rem;color:rgba(223,230,239,.55);line-height:1.75;font-weight:300}
+    .proj-stack{padding:2.5rem}
+    .stack-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem}
+    .stack-item{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+    .stack-dot{width:6px;height:6px;background:var(--lime);flex-shrink:0;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)}
+    .stack-dot.c2{background:var(--cyan)}
+    .stack-dot.c3{background:var(--orange)}
+    .stack-name{font-family:var(--mono);font-size:11px;color:var(--text);letter-spacing:.06em}
+    .stack-detail{font-size:.78rem;color:var(--muted);font-weight:300}
+
+    /* CERTS */
+    #certs{background:var(--bg)}
+    .cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--dim);border:1px solid var(--dim)}
+    .cert-item{background:var(--bg);padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.75rem;transition:background .2s}
+    .cert-item:hover{background:var(--s1)}
+    .cert-diamond{width:8px;height:8px;background:var(--lime);flex-shrink:0;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);opacity:.6}
+    .cert-name{font-family:var(--mono);font-size:10px;color:var(--text);letter-spacing:.06em}
+
+    /* CONTACT */
+    #contact{background:var(--s1)}
+    .contact-wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:start}
+    .contact-headline{font-family:var(--head);font-size:clamp(2rem,3.5vw,2.8rem);letter-spacing:.02em;line-height:1.05;color:var(--text);margin-bottom:1rem}
+    .contact-headline span{color:var(--lime)}
+    .contact-body{font-size:.88rem;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:2rem}
+    .contact-cta{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--bg);background:var(--lime);padding:.9rem 1.8rem;text-decoration:none;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:opacity .2s,transform .2s}
+    .contact-cta:hover{opacity:.88;transform:translateX(4px)}
+    .contact-rows{display:flex;flex-direction:column;gap:0}
+    .contact-row{display:flex;align-items:stretch;border:1px solid var(--dim);border-bottom:none}
+    .contact-row:last-child{border-bottom:1px solid var(--dim)}
+    .cr-label{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:1rem;border-right:1px solid var(--dim);width:100px;flex-shrink:0;display:flex;align-items:center;background:var(--s2)}
+    .cr-val{padding:1rem 1.25rem;font-family:var(--mono);font-size:11px;color:var(--text);letter-spacing:.04em;display:flex;align-items:center}
+    .cr-val.hi{color:var(--lime)}
+
+    /* FOOTER */
+    .pg-footer{padding:1.5rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--dim)}
+    .pg-footer p{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.1em;opacity:.5}
+    .pg-footer span{color:var(--lime);opacity:1}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.in{opacity:1;transform:none}
+
+    /* MOBILE */
+    @media(max-width:960px){
+      :root{--sw:64px}
+      .sb-top{padding:1.5rem .75rem}
+      .sb-name,.sb-role,.sb-location{display:none}
+      .profile-pic{width:42px;height:42px;clip-path:none;border-radius:2px}
+      .profile-wrap{width:42px;height:42px;margin:0 auto}
+      .sb-nav a{justify-content:center}
+      .nav-num,.nav-label{display:none}
+      .nav-bar{width:3px;height:28px}
+      .sb-foot{display:none}
+      .section{padding:3.5rem 1.5rem}
+      .about-layout,.contact-wrap{grid-template-columns:1fr}
+      .exp-grid{grid-template-columns:1fr 1fr}
+      .xp-item,.edu-item{grid-template-columns:1fr}
+      .xp-left,.edu-year-col{border-right:none;border-bottom:1px solid var(--dim)}
+      .project-card{grid-template-columns:1fr}
+      .proj-body{border-right:none;border-bottom:1px solid var(--dim)}
+      .cert-grid{grid-template-columns:1fr 1fr}
+      .skills-layout{grid-template-columns:1fr}
+      .skill-block{border-right:none}
+    }
+  </style>
 </head>
 <body>
-  <!-- Sidebar Section -->
-  <aside class="sidebar">
-    <img src="images/profile.jpg" alt="Profile Picture" class="profile-pic">
-    <h2>Mohammad Rashed</h2>
-    <p>IT Specialist | Australia</p>
-    <nav class="sidebar-nav">
-      <a href="#home" class="active">Home</a>
-      <a href="#about">About</a>
-      <a href="#expertise">Expertise</a>
-      <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
-      <a href="#experience">Experience</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <footer class="sidebar-footer">
-      <p>&copy; 2023 All rights reserved.</p>
-      <a href="mailto:shoikot.dhk@gmail.com">E-Mail Me!</a>
-    </footer>
-  </aside>
 
-  <!-- Slider Section as Main Content Area -->
-  <section class="slider">
-  <div class="slide active" style="background-image: url('images/slide1.jpg');">
-    <div class="slide-text">
-      <h1>I'm a Network and Security Expert</h1>
+<aside class="sidebar">
+  <div class="sb-top">
+    <div class="profile-wrap">
+      <img src="images/profile.jpg" alt="Mohammad Rashed" class="profile-pic" />
     </div>
+    <div class="sb-name" style="margin-top:1rem">MOHAMMAD<br><span>RASHED</span></div>
+    <p class="sb-role">IT Professional</p>
+    <p class="sb-location">Adelaide, SA · Australia</p>
   </div>
-  <div class="slide" style="background-image: url('images/slide2.jpg');">
-    <div class="slide-text">
-      <h1>An Experienced Network Enthusiast</h1>
-    </div>
-  </div>
-  <div class="slide" style="background-image: url('images/slide3.jpg');">
-    <div class="slide-text">
-      <h1>Your Trusted IT Specialist</h1>
-    </div>
-  </div>
+  <nav class="sb-nav">
+    <a href="#home" class="active"><span class="nav-num">01</span><span class="nav-bar"></span><span class="nav-label">Home</span></a>
+    <a href="#about"><span class="nav-num">02</span><span class="nav-bar"></span><span class="nav-label">About</span></a>
+    <a href="#expertise"><span class="nav-num">03</span><span class="nav-bar"></span><span class="nav-label">Expertise</span></a>
+    <a href="#skills"><span class="nav-num">04</span><span class="nav-bar"></span><span class="nav-label">Skills</span></a>
+    <a href="#education"><span class="nav-num">05</span><span class="nav-bar"></span><span class="nav-label">Education</span></a>
+    <a href="#experience"><span class="nav-num">06</span><span class="nav-bar"></span><span class="nav-label">Experience</span></a>
+    <a href="#project"><span class="nav-num">07</span><span class="nav-bar"></span><span class="nav-label">Project</span></a>
+    <a href="#certs"><span class="nav-num">08</span><span class="nav-bar"></span><span class="nav-label">Certs</span></a>
+    <a href="#contact"><span class="nav-num">09</span><span class="nav-bar"></span><span class="nav-label">Contact</span></a>
+  </nav>
+  <footer class="sb-foot">
+    <p>&copy; 2025 All rights reserved.</p>
+    <a href="mailto:shoikot.dhk@gmail.com" class="sb-email">E-Mail Me</a>
+  </footer>
+</aside>
 
-  <!-- Slider Controls -->
-  <div class="slider-controls">
-    <span class="prev" onclick="prevSlide()">&#10094;</span>
-    <span class="next" onclick="nextSlide()">&#10095;</span>
-  </div>
-</section>
+<div class="main">
 
-    <!-- Slider Controls -->
+  <!-- SLIDER -->
+  <section class="slider" id="home">
+    <div class="slide active" style="background-image:url('images/slide1.jpg')">
+      <div class="slide-inner">
+        <div class="slide-tag">IT Professional · Adelaide SA</div>
+        <h1 class="slide-h1">Network &amp;<br><em>Security</em><br>Expert</h1>
+        <p class="slide-sub">Designing resilient infrastructure and securing enterprise systems for a connected world.</p>
+      </div>
+    </div>
+    <div class="slide" style="background-image:url('images/slide2.jpg')">
+      <div class="slide-inner">
+        <div class="slide-tag">Networking · Cloud · ERP Support</div>
+        <h1 class="slide-h1">Systems<br><em>Support</em><br>Coordinator</h1>
+        <p class="slide-sub">Supporting enterprise platforms for Coca-Cola, McDonald's &amp; Asahi Beverages at Hoshizaki Lancer.</p>
+      </div>
+    </div>
+    <div class="slide" style="background-image:url('images/slide3.jpg')">
+      <div class="slide-inner">
+        <div class="slide-tag">BIT Networking &amp; Security · Federation University</div>
+        <h1 class="slide-h1">Your Trusted<br><em>IT</em><br>Specialist</h1>
+        <p class="slide-sub">From helpdesk to complex infrastructure — reliable, precise, and professional.</p>
+      </div>
+    </div>
+    <div class="slide-dots">
+      <div class="slide-dot active" onclick="goSlide(0)"></div>
+      <div class="slide-dot" onclick="goSlide(1)"></div>
+      <div class="slide-dot" onclick="goSlide(2)"></div>
+    </div>
     <div class="slider-controls">
       <span class="prev" onclick="prevSlide()">&#10094;</span>
       <span class="next" onclick="nextSlide()">&#10095;</span>
     </div>
+    <div class="slide-progress" id="sprogress"></div>
   </section>
 
-  <!-- Link to JavaScript file for slider functionality -->
-  <script src="js/slider.js"></script>
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="sec-eyebrow">02 — About</div>
+    <h2 class="sec-title">Who I Am</h2>
+    <div class="about-layout">
+      <div class="about-body reveal">
+        <p>I'm <strong>Mohammad Rashed</strong>, a reliable and adaptable IT professional based in <strong>Adelaide, South Australia</strong> with hands-on experience across tech support, networking, cybersecurity, and cloud systems.</p>
+        <p>Currently working as a <strong>Customer &amp; Systems Support Coordinator at Hoshizaki Lancer Pty Ltd</strong>, I support enterprise platforms like Infor LN ERP and Power BI for major clients including Coca-Cola, McDonald's, and Asahi Beverages.</p>
+        <p>I hold a <strong>Bachelor of Information Technology (Networking &amp; Security)</strong> from Federation University Australia and am completing an <strong>ACS-recognised Professional Year Program in ICT</strong>. I enjoy solving problems, keeping systems running smoothly, and communicating clearly under pressure.</p>
+        <div class="about-links">
+          <a href="https://linkedin.com/in/mdharashed" target="_blank" class="about-link">↗ LinkedIn</a>
+          <a href="https://mrashed17.github.io/portfolio/" target="_blank" class="about-link">↗ Portfolio</a>
+          <a href="tel:+61475863581" class="about-link">↗ +61 475 863 581</a>
+        </div>
+      </div>
+      <div class="stat-panel reveal">
+        <div class="stat-row"><div class="stat-key">Location</div><div class="stat-val"><span class="stat-small">Adelaide, SA 5108</span></div></div>
+        <div class="stat-row"><div class="stat-key">Experience</div><div class="stat-val"><span class="stat-big">6+</span></div></div>
+        <div class="stat-row"><div class="stat-key">Degree</div><div class="stat-val"><span class="stat-small">BIT Networking &amp; Security</span></div></div>
+        <div class="stat-row"><div class="stat-key">Prof. Year</div><div class="stat-val"><span class="stat-small">ACS ICT 2025–26</span></div></div>
+        <div class="stat-row"><div class="stat-key">Status</div><div class="stat-val"><span class="stat-small" style="color:var(--lime)">Open to Roles</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERTISE -->
+  <section class="section" id="expertise">
+    <div class="sec-eyebrow">03 — Expertise</div>
+    <h2 class="sec-title">What I Do</h2>
+    <div class="exp-grid">
+      <div class="exp-card reveal"><div class="exp-num">01</div><div class="exp-title">IT Service Management</div><p class="exp-desc">ERP system support, CRM management, SLA adherence, ServiceNow ticketing, and KB documentation for enterprise clients.</p><div class="exp-tools"><span class="exp-tool">Infor LN</span><span class="exp-tool">ServiceNow</span><span class="exp-tool">CRM</span><span class="exp-tool">Power BI</span></div></div>
+      <div class="exp-card reveal"><div class="exp-num">02</div><div class="exp-title">Networking &amp; Infrastructure</div><p class="exp-desc">TCP/IP, DNS, DHCP, VPNs, VLANs, routers and switches configuration, network diagnostics and Windows Server.</p><div class="exp-tools"><span class="exp-tool">Cisco</span><span class="exp-tool">VLANs</span><span class="exp-tool">VPN</span><span class="exp-tool">Windows Server</span></div></div>
+      <div class="exp-card reveal"><div class="exp-num">03</div><div class="exp-title">Cloud &amp; Security</div><p class="exp-desc">Microsoft 365, Active Directory, Microsoft Defender, AWS and Azure, endpoint security, and compliance frameworks.</p><div class="exp-tools"><span class="exp-tool">Azure</span><span class="exp-tool">AWS</span><span class="exp-tool">MS 365</span><span class="exp-tool">Defender</span></div></div>
+      <div class="exp-card reveal"><div class="exp-num">04</div><div class="exp-title">Data &amp; Analysis</div><p class="exp-desc">Data validation and integrity, Wireshark packet analysis, process gap analysis, Power BI dashboards, SQL.</p><div class="exp-tools"><span class="exp-tool">Wireshark</span><span class="exp-tool">Power BI</span><span class="exp-tool">SQL</span><span class="exp-tool">Excel</span></div></div>
+      <div class="exp-card reveal"><div class="exp-num">05</div><div class="exp-title">OS &amp; End-User Support</div><p class="exp-desc">Windows 10/11 expert-level, Linux intermediate, device setup, hardware troubleshooting, Tier 1–3 escalation.</p><div class="exp-tools"><span class="exp-tool">Windows 11</span><span class="exp-tool">Linux</span><span class="exp-tool">Tier 3</span></div></div>
+      <div class="exp-card reveal"><div class="exp-num">06</div><div class="exp-title">Automation &amp; Dev Tools</div><p class="exp-desc">Python scripting and basic automation, GitHub version control, SharePoint, Jira, Trello, Teams workflows.</p><div class="exp-tools"><span class="exp-tool">Python</span><span class="exp-tool">GitHub</span><span class="exp-tool">Jira</span><span class="exp-tool">SharePoint</span></div></div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section" id="skills">
+    <div class="sec-eyebrow">04 — Skills</div>
+    <h2 class="sec-title">Technical Proficiency</h2>
+    <div class="skills-layout">
+      <div class="skill-block reveal" data-pct="92"><div class="skill-header"><span class="skill-name">Networking &amp; Infrastructure</span><span class="skill-pct">92%</span></div><div class="skill-track"><div class="skill-fill"></div></div><div class="skill-chips"><span class="chip">TCP/IP</span><span class="chip">DNS/DHCP</span><span class="chip">VLANs</span><span class="chip">VPN</span><span class="chip">CCNA</span></div></div>
+      <div class="skill-block reveal" data-pct="88"><div class="skill-header"><span class="skill-name">Windows Server &amp; AD</span><span class="skill-pct">88%</span></div><div class="skill-track"><div class="skill-fill alt"></div></div><div class="skill-chips"><span class="chip">AD DS</span><span class="chip">GPO</span><span class="chip">DNS</span><span class="chip">Windows 10/11</span></div></div>
+      <div class="skill-block reveal" data-pct="85"><div class="skill-header"><span class="skill-name">Cybersecurity</span><span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-fill"></div></div><div class="skill-chips"><span class="chip">Firewalls</span><span class="chip">IDS/IPS</span><span class="chip">Pen Testing</span><span class="chip">Cryptography</span></div></div>
+      <div class="skill-block reveal" data-pct="80"><div class="skill-header"><span class="skill-name">Cloud (Azure / AWS)</span><span class="skill-pct">80%</span></div><div class="skill-track"><div class="skill-fill alt2"></div></div><div class="skill-chips"><span class="chip">Azure</span><span class="chip">AWS</span><span class="chip">MS 365</span><span class="chip">Cloud Security</span></div></div>
+      <div class="skill-block reveal" data-pct="85"><div class="skill-header"><span class="skill-name">ERP &amp; ITSM</span><span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-fill alt"></div></div><div class="skill-chips"><span class="chip">Infor LN</span><span class="chip">ServiceNow</span><span class="chip">Power BI</span><span class="chip">CRM</span></div></div>
+      <div class="skill-block reveal" data-pct="72"><div class="skill-header"><span class="skill-name">Python &amp; Automation</span><span class="skill-pct">72%</span></div><div class="skill-track"><div class="skill-fill alt2"></div></div><div class="skill-chips"><span class="chip">Python</span><span class="chip">Scripting</span><span class="chip">GitHub</span><span class="chip">Bash</span></div></div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section" id="education">
+    <div class="sec-eyebrow">05 — Education</div>
+    <h2 class="sec-title">Academic Background</h2>
+    <div class="edu-list">
+      <div class="edu-item reveal">
+        <div class="edu-year-col"><span class="edu-badge">Current</span><span class="edu-years">Apr 2025 — Feb 2026</span></div>
+        <div class="edu-content"><div class="edu-title">Professional Year Program — ICT</div><div class="edu-institution">Academy IT · Adelaide, Australia</div><div class="edu-notes">ACS-recognised program focused on workplace communication, industry standards and Australian business practices. Developing skills in business systems, stakeholder engagement, and ICT support through structured training and internship components.</div></div>
+      </div>
+      <div class="edu-item reveal">
+        <div class="edu-year-col"><span class="edu-badge">Degree</span><span class="edu-years">Feb 2023 — Nov 2024</span></div>
+        <div class="edu-content"><div class="edu-title">Bachelor of Information Technology (Networking &amp; Security)</div><div class="edu-institution">Federation University Australia · Adelaide</div><div class="edu-notes">Cybersecurity &amp; Ethical Hacking · Penetration Testing · Firewalls, IDS/IPS, VPNs · Cloud Security (AWS/Azure) · Database Security (OWASP Top 10, DevSecOps) · Secure OS Management</div></div>
+      </div>
+      <div class="edu-item reveal">
+        <div class="edu-year-col"><span class="edu-badge">Diploma</span><span class="edu-years">Sep 2016 — Oct 2018</span></div>
+        <div class="edu-content"><div class="edu-title">Diploma in Information Technology</div><div class="edu-institution">YES International College · Kuala Lumpur, Malaysia</div><div class="edu-notes">IT System Design &amp; Development · Network Deployment &amp; Security · Wired and wireless network security techniques.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience">
+    <div class="sec-eyebrow">06 — Experience</div>
+    <h2 class="sec-title">Career History</h2>
+    <div class="xp-list">
+      <div class="xp-item reveal">
+        <div class="xp-left"><span class="xp-type">Current Role</span><span class="xp-period">Apr 2025 — Present</span><span class="xp-co">Hoshizaki Lancer Pty Ltd</span><span class="xp-loc">Adelaide, SA</span></div>
+        <div class="xp-right"><div class="xp-role">Customer &amp; Systems Support Coordinator</div><ul class="xp-bullets"><li>Application &amp; system support for Infor LN ERP, Power BI and CRM — clients include Coca-Cola, McDonald's, and Asahi Beverages.</li><li>Troubleshoot system issues, resolve discrepancies, escalate unresolved errors to IT specialists.</li><li>Streamlined ERP and reporting processes via automation and data validation, reducing manual errors and improving management insights.</li><li>Use Power BI dashboards to track order status, monitor variances, and deliver reporting insights.</li></ul><div class="xp-tags"><span class="xp-tag">Infor LN ERP</span><span class="xp-tag">Power BI</span><span class="xp-tag">CRM</span><span class="xp-tag">ServiceNow</span></div></div>
+      </div>
+      <div class="xp-item reveal">
+        <div class="xp-left"><span class="xp-type">IT</span><span class="xp-period">Oct 2024 — May 2025</span><span class="xp-co">Tech Domain</span><span class="xp-loc">Adelaide, SA</span></div>
+        <div class="xp-right"><div class="xp-role">IT Network Technician</div><ul class="xp-bullets"><li>Configure, monitor, and maintain routers, switches, VLANs, and VPNs for secure, reliable connectivity.</li><li>Technical support for Windows and Linux users, meeting strict SLAs.</li><li>Implement system upgrades and migrations with minimal downtime; document and escalate complex cases.</li></ul><div class="xp-tags"><span class="xp-tag">VLANs</span><span class="xp-tag">VPN</span><span class="xp-tag">Windows</span><span class="xp-tag">Linux</span><span class="xp-tag">SLA</span></div></div>
+      </div>
+      <div class="xp-item reveal">
+        <div class="xp-left"><span class="xp-type">Leadership</span><span class="xp-period">Nov 2023 — Nov 2025</span><span class="xp-co">Woolworths Supermarkets</span><span class="xp-loc">Adelaide, SA</span></div>
+        <div class="xp-right"><div class="xp-role">Team Supervisor, Store Trade</div><ul class="xp-bullets"><li>Supervised daily store operations across customer service and online fulfilment, ensuring smooth order processing.</li><li>Managed team rosters, trained and mentored new staff on procedures and standards.</li></ul><div class="xp-tags"><span class="xp-tag">Leadership</span><span class="xp-tag">Operations</span><span class="xp-tag">Mentoring</span></div></div>
+      </div>
+      <div class="xp-item reveal">
+        <div class="xp-left"><span class="xp-type">Leadership</span><span class="xp-period">Nov 2022 — Feb 2023</span><span class="xp-co">Myer Pty Ltd</span><span class="xp-loc">Sydney, NSW</span></div>
+        <div class="xp-right"><div class="xp-role">Team Leader, Customer Fulfilment</div><ul class="xp-bullets"><li>Led and mentored 110+ staff, boosting productivity by 20% through streamlined shift operations.</li><li>Managed rosters, prepared performance reports, and supported continuous improvement initiatives.</li></ul><div class="xp-tags"><span class="xp-tag">110+ Team</span><span class="xp-tag">+20% Productivity</span><span class="xp-tag">Operations</span></div></div>
+      </div>
+      <div class="xp-item reveal">
+        <div class="xp-left"><span class="xp-type">IT Support</span><span class="xp-period">Jul 2019 — Nov 2020</span><span class="xp-co">Empire Technologies</span><span class="xp-loc">Sydney, NSW</span></div>
+        <div class="xp-right"><div class="xp-role">IT Support Technician</div><ul class="xp-bullets"><li>Front-line support for walk-in customers — laptops, desktops, and mobile devices.</li><li>Windows installations, data backups, virus removal, hardware repairs, and software troubleshooting.</li></ul><div class="xp-tags"><span class="xp-tag">Hardware</span><span class="xp-tag">Windows</span><span class="xp-tag">Customer Support</span></div></div>
+      </div>
+      <div class="xp-item reveal">
+        <div class="xp-left"><span class="xp-type">Internship</span><span class="xp-period">Aug 2018 — Apr 2019</span><span class="xp-co">TA Software Solutions</span><span class="xp-loc">Kuala Lumpur, MY</span></div>
+        <div class="xp-right"><div class="xp-role">IT Intern</div><ul class="xp-bullets"><li>Contributed to CMS development — software analysis, bug identification, and performance testing.</li><li>Created detailed bug reports and analyses, accelerating issue resolution and system stability.</li></ul><div class="xp-tags"><span class="xp-tag">CMS</span><span class="xp-tag">QA Testing</span><span class="xp-tag">Bug Reports</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT -->
+  <section class="section" id="project">
+    <div class="sec-eyebrow">07 — Academic Project</div>
+    <h2 class="sec-title">Featured Work</h2>
+    <div class="project-card reveal">
+      <div class="proj-body">
+        <div class="proj-badge">Academic Project · 2024</div>
+        <div class="proj-title">Teaching &amp; Grading System — Adelaide Japanese Community School</div>
+        <p class="proj-desc">Developed a custom web-based teaching and grading system for SACE courses. Teachers can manage assignments, input scores, provide feedback, and generate reports. Students can view grades and submission statuses in real time. The system streamlined grading workflows and enhanced teacher–student communication across the school.</p>
+      </div>
+      <div class="proj-stack">
+        <div class="stack-label">Tech Stack</div>
+        <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">PHP &amp; JavaScript</div><div class="stack-detail">Backend logic &amp; dynamic UI</div></div></div>
+        <div class="stack-item"><div class="stack-dot c2"></div><div><div class="stack-name">HTML &amp; CSS</div><div class="stack-detail">Frontend structure &amp; styling</div></div></div>
+        <div class="stack-item"><div class="stack-dot c3"></div><div><div class="stack-name">SQL Database</div><div class="stack-detail">Data encryption &amp; access controls</div></div></div>
+        <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">GitHub</div><div class="stack-detail">Version control &amp; collaboration</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTS -->
+  <section class="section" id="certs">
+    <div class="sec-eyebrow">08 — Certifications &amp; Training</div>
+    <h2 class="sec-title">Credentials</h2>
+    <div class="cert-grid">
+      <div class="cert-item reveal"><div class="cert-diamond"></div><span class="cert-name">CCNA 2020: Networking Components</span></div>
+      <div class="cert-item reveal"><div class="cert-diamond"></div><span class="cert-name">Certificate in Graphic Design</span></div>
+      <div class="cert-item reveal"><div class="cert-diamond"></div><span class="cert-name">Ethics and Project Management</span></div>
+      <div class="cert-item reveal"><div class="cert-diamond"></div><span class="cert-name">Developing a Continuous Learning Mindset</span></div>
+      <div class="cert-item reveal"><div class="cert-diamond"></div><span class="cert-name">Enabling Strategic Business-IT Alignment</span></div>
+      <div class="cert-item reveal"><div class="cert-diamond"></div><span class="cert-name">ACS ICT Professional Year Program</span></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="sec-eyebrow">09 — Contact</div>
+    <h2 class="sec-title">Get In Touch</h2>
+    <div class="contact-wrap">
+      <div class="reveal">
+        <h3 class="contact-headline">Let's build<br>something <span>reliable.</span></h3>
+        <p class="contact-body">Open to full-time IT roles, contract work, and technical consultations across Adelaide and beyond. Whether you need a network technician, systems support specialist, or reliable IT partner — I'd love to connect.</p>
+        <a href="mailto:shoikot.dhk@gmail.com" class="contact-cta">Send an email →</a>
+      </div>
+      <div class="contact-rows reveal">
+        <div class="contact-row"><span class="cr-label">Phone</span><span class="cr-val">+61 475 863 581</span></div>
+        <div class="contact-row"><span class="cr-label">Email</span><span class="cr-val">shoikot.dhk@gmail.com</span></div>
+        <div class="contact-row"><span class="cr-label">Location</span><span class="cr-val">Adelaide, SA 5108</span></div>
+        <div class="contact-row"><span class="cr-label">LinkedIn</span><span class="cr-val">linkedin.com/in/mdharashed</span></div>
+        <div class="contact-row"><span class="cr-label">Status</span><span class="cr-val hi">Open to Opportunities</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="pg-footer">
+    <p>&copy; 2025 <span>Mohammad Rashed</span> — IT Professional</p>
+    <p>Adelaide, South Australia</p>
+  </footer>
+</div>
+
+<script>
+  let cur=0;
+  const slides=document.querySelectorAll('.slide');
+  const dots=document.querySelectorAll('.slide-dot');
+  const prog=document.getElementById('sprogress');
+  let timer;
+
+  function goSlide(n){
+    slides[cur].classList.remove('active');
+    dots[cur].classList.remove('active');
+    cur=(n+slides.length)%slides.length;
+    slides[cur].classList.add('active');
+    dots[cur].classList.add('active');
+    prog.classList.remove('running');
+    prog.style.width='0';
+    void prog.offsetWidth;
+    prog.classList.add('running');
+  }
+
+  function nextSlide(){goSlide(cur+1);resetAuto()}
+  function prevSlide(){goSlide(cur-1);resetAuto()}
+  function resetAuto(){clearInterval(timer);timer=setInterval(()=>goSlide(cur+1),5000)}
+
+  goSlide(0);resetAuto();
+
+  const navLinks=document.querySelectorAll('.sb-nav a');
+  const allSecs=document.querySelectorAll('section[id],.slider[id]');
+  const navObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        navLinks.forEach(a=>a.classList.remove('active'));
+        const lnk=document.querySelector(`.sb-nav a[href="#${e.target.id}"]`);
+        if(lnk)lnk.classList.add('active');
+      }
+    });
+  },{threshold:.35});
+  allSecs.forEach(s=>navObs.observe(s));
+
+  const reveals=document.querySelectorAll('.reveal');
+  const revObs=new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){
+        e.target.style.transitionDelay=`${(i%5)*70}ms`;
+        e.target.classList.add('in');
+        revObs.unobserve(e.target);
+      }
+    });
+  },{threshold:.1});
+  reveals.forEach(el=>revObs.observe(el));
+
+  const skillBlocks=document.querySelectorAll('.skill-block');
+  const skillObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const fill=e.target.querySelector('.skill-fill');
+        if(fill)fill.style.width=e.target.dataset.pct+'%';
+        skillObs.unobserve(e.target);
+      }
+    });
+  },{threshold:.3});
+  skillBlocks.forEach(b=>skillObs.observe(b));
+</script>
 </body>
 </html>
