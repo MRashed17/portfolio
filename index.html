@@ -1,531 +1,948 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mohammad Rashed — IT Professional</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg:#06080b; --s1:#0c1018; --s2:#121820; --s3:#1a2230;
-      --lime:#c8ff00; --cyan:#00d4ff; --orange:#ff5c2b;
-      --text:#dfe6ef; --muted:#5a6778; --dim:#1e2a3a;
-      --sw:300px;
-      --head:'Archivo Black',sans-serif;
-      --body:'Archivo',sans-serif;
-      --mono:'DM Mono',monospace;
-    }
-    html{scroll-behavior:smooth}
-    body{background:var(--bg);color:var(--text);font-family:var(--body);display:flex;min-height:100vh}
-    ::-webkit-scrollbar{width:3px}
-    ::-webkit-scrollbar-track{background:var(--bg)}
-    ::-webkit-scrollbar-thumb{background:var(--lime)}
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Mohammad Rashed — IT Professional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04060a; --s1:#080d15; --s2:#0d1825;
+  --g:#00ff88; --b:#00aaff; --p:#b44fff; --o:#ff6b35;
+  --text:#eef2f8; --muted:#4a5a72; --dim:rgba(255,255,255,.07);
+  --sw:275px;
+  --sans:'Syne',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);display:flex;min-height:100vh;overflow-x:hidden;cursor:none}
+::-webkit-scrollbar{width:2px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--g)}
 
-    /* SIDEBAR */
-    .sidebar{width:var(--sw);position:fixed;top:0;left:0;bottom:0;background:var(--s1);display:flex;flex-direction:column;z-index:200;overflow:hidden}
-    .sidebar::after{content:'';position:absolute;top:0;left:0;width:24px;height:24px;border-top:2px solid var(--lime);border-left:2px solid var(--lime);pointer-events:none}
-    .sb-top{padding:2.5rem 2rem 2rem;border-bottom:1px solid var(--dim);position:relative}
-    .sb-top::after{content:'';position:absolute;bottom:-1px;right:0;width:16px;height:16px;border-bottom:1px solid var(--lime);border-right:1px solid var(--lime)}
-    .profile-wrap{position:relative;width:90px;height:90px;margin-bottom:1.25rem}
-    .profile-pic{width:90px;height:90px;object-fit:cover;display:block;filter:grayscale(25%) contrast(1.1);clip-path:polygon(0 0,85% 0,100% 15%,100% 100%,15% 100%,0 85%)}
-    .profile-wrap::before,.profile-wrap::after{content:'';position:absolute;width:12px;height:12px}
-    .profile-wrap::before{top:-4px;left:-4px;border-top:2px solid var(--lime);border-left:2px solid var(--lime)}
-    .profile-wrap::after{bottom:-4px;right:-4px;border-bottom:2px solid var(--lime);border-right:2px solid var(--lime)}
-    .sb-name{font-family:var(--head);font-size:1.2rem;letter-spacing:.04em;color:var(--text);line-height:1.15}
-    .sb-name span{color:var(--lime)}
-    .sb-role{font-family:var(--mono);font-size:9.5px;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;margin-top:.35rem;display:flex;align-items:center;gap:.4rem}
-    .sb-role::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--lime);box-shadow:0 0 6px var(--lime);animation:blink 2s ease-in-out infinite}
-    @keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
-    .sb-location{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.1em;margin-top:.25rem;opacity:.6}
-    .sb-nav{flex:1;padding:1.5rem 0;overflow-y:auto}
-    .sb-nav a{display:flex;align-items:center;height:44px;text-decoration:none;position:relative;transition:background .2s}
-    .nav-num{font-family:var(--mono);font-size:9px;color:var(--lime);opacity:.3;letter-spacing:.1em;width:2.5rem;text-align:right;padding-right:.6rem;flex-shrink:0;transition:opacity .2s}
-    .nav-bar{width:2px;height:100%;background:var(--dim);flex-shrink:0;transition:background .2s,width .2s,box-shadow .2s}
-    .nav-label{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;padding-left:1rem;transition:color .2s}
-    .sb-nav a:hover .nav-bar,.sb-nav a.active .nav-bar{background:var(--lime);width:3px;box-shadow:0 0 8px var(--lime)}
-    .sb-nav a:hover .nav-label,.sb-nav a.active .nav-label{color:var(--text)}
-    .sb-nav a:hover .nav-num,.sb-nav a.active .nav-num{opacity:1}
-    .sb-foot{padding:1.5rem 2rem;border-top:1px solid var(--dim)}
-    .sb-foot p{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.08em;margin-bottom:.75rem;opacity:.5}
-    .sb-email{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--bg);background:var(--lime);padding:.55rem 1rem;text-decoration:none;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));transition:opacity .2s,transform .2s}
-    .sb-email:hover{opacity:.85;transform:translateX(3px)}
+/* ── CUSTOM CURSOR ── */
+#cur{position:fixed;width:10px;height:10px;border-radius:50%;background:var(--g);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .15s,height .15s,opacity .15s;left:-100px;top:-100px}
+#cur-ring{position:fixed;width:34px;height:34px;border-radius:50%;border:1px solid rgba(0,255,136,.3);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s;left:-100px;top:-100px}
+body.hov #cur{width:20px;height:20px;opacity:.4}
+body.hov #cur-ring{width:52px;height:52px}
 
-    /* MAIN */
-    .main{margin-left:var(--sw);flex:1;min-width:0}
+/* ── AURORA BACKGROUND ── */
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.ab{position:absolute;border-radius:50%;filter:blur(90px);animation:auroraDrift linear infinite}
+.ab1{width:700px;height:700px;background:radial-gradient(circle,var(--g),transparent 70%);opacity:.09;top:-200px;left:-150px;animation-duration:24s}
+.ab2{width:600px;height:600px;background:radial-gradient(circle,var(--b),transparent 70%);opacity:.09;top:25%;right:-200px;animation-duration:19s;animation-delay:-8s}
+.ab3{width:550px;height:550px;background:radial-gradient(circle,var(--p),transparent 70%);opacity:.07;bottom:-100px;left:25%;animation-duration:27s;animation-delay:-13s}
+@keyframes auroraDrift{
+  0%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(50px,-35px) scale(1.08)}
+  66%{transform:translate(-35px,50px) scale(.94)}
+  100%{transform:translate(0,0) scale(1)}
+}
 
-    /* SLIDER */
-    .slider{position:relative;height:100vh;overflow:hidden}
-    .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease}
-    .slide::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(6,8,11,.97) 0%,rgba(6,8,11,.75) 55%,rgba(6,8,11,.2) 100%)}
-    .slide::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.04) 3px,rgba(0,0,0,.04) 4px);pointer-events:none}
-    .slide.active{opacity:1}
-    .slide-inner{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:0 4rem 4.5rem;z-index:2}
-    .slide-tag{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem}
-    .slide-tag::before{content:'';display:inline-block;width:30px;height:1px;background:var(--lime)}
-    .slide-h1{font-family:var(--head);font-size:clamp(2.8rem,5.5vw,5rem);line-height:.93;letter-spacing:-.01em;color:var(--text);max-width:680px}
-    .slide-h1 em{font-style:normal;color:var(--lime);display:block}
-    .slide-sub{margin-top:1.25rem;font-size:.88rem;color:rgba(223,230,239,.45);max-width:380px;line-height:1.7;font-weight:300}
-    .slide-dots{position:absolute;right:3rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;z-index:10}
-    .slide-dot{width:2px;height:24px;background:var(--dim);cursor:pointer;transition:all .35s}
-    .slide-dot.active{height:48px;background:var(--lime);box-shadow:0 0 10px rgba(200,255,0,.5)}
-    .slider-controls{position:absolute;bottom:3rem;right:3rem;display:flex;z-index:10}
-    .slider-controls span{width:46px;height:46px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);font-size:1.1rem;border:1px solid var(--dim);transition:all .2s;user-select:none}
-    .slider-controls span:hover{color:var(--lime);border-color:var(--lime);background:rgba(200,255,0,.04)}
-    .slider-controls .prev{border-right:none}
-    .slide-progress{position:absolute;bottom:0;left:0;height:2px;background:var(--lime);width:0;z-index:10;transition:width 0s}
-    .slide-progress.running{transition:width 5s linear;width:100%}
+/* Grain texture */
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.28;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='.05'/%3E%3C/svg%3E")}
 
-    /* SECTIONS */
-    .section{padding:6rem 4rem;border-bottom:1px solid var(--dim);position:relative}
-    .section::before{content:'';position:absolute;top:2rem;left:2rem;width:14px;height:14px;border-top:1px solid var(--lime);border-left:1px solid var(--lime);opacity:.3}
-    .sec-eyebrow{font-family:var(--mono);font-size:9.5px;color:var(--lime);letter-spacing:.25em;text-transform:uppercase;margin-bottom:.4rem}
-    .sec-title{font-family:var(--head);font-size:clamp(2rem,3.5vw,3rem);letter-spacing:.01em;line-height:1;color:var(--text);margin-bottom:3rem}
+/* ── SIDEBAR ── */
+.sidebar{
+  width:var(--sw);position:fixed;top:0;left:0;bottom:0;
+  background:rgba(6,10,18,.82);
+  backdrop-filter:blur(28px) saturate(1.3);
+  -webkit-backdrop-filter:blur(28px) saturate(1.3);
+  border-right:1px solid rgba(0,255,136,.09);
+  display:flex;flex-direction:column;z-index:500;overflow:hidden;
+}
+/* Top neon line sweep */
+.sidebar::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent 0%,var(--g) 40%,var(--b) 60%,transparent 100%);
+  animation:sbSweep 5s ease-in-out infinite;
+}
+@keyframes sbSweep{0%,100%{opacity:.3}50%{opacity:.9}}
+/* Top glow */
+.sidebar::after{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:180px;height:200px;
+  background:radial-gradient(ellipse at top,rgba(0,255,136,.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+/* Animated bg grid in sidebar */
+.sb-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(0,255,136,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,255,136,.025) 1px,transparent 1px);
+  background-size:30px 30px;
+  animation:gridShift 25s linear infinite;
+  pointer-events:none;
+}
+@keyframes gridShift{from{background-position:0 0}to{background-position:30px 30px}}
 
-    /* ABOUT */
-    #about{background:var(--bg)}
-    .about-layout{display:grid;grid-template-columns:1.5fr 1fr;gap:4rem;align-items:start}
-    .about-body p{font-size:.93rem;color:rgba(223,230,239,.65);line-height:1.85;font-weight:300;margin-bottom:1rem}
-    .about-body p strong{color:var(--text);font-weight:500}
-    .about-links{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem}
-    .about-link{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--dim);padding:.45rem .9rem;text-decoration:none;transition:all .2s}
-    .about-link:hover{color:var(--lime);border-color:var(--lime);background:rgba(200,255,0,.03)}
-    .stat-panel{border:1px solid var(--dim);overflow:hidden}
-    .stat-row{display:flex;align-items:stretch;border-bottom:1px solid var(--dim)}
-    .stat-row:last-child{border-bottom:none}
-    .stat-key{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:1rem;border-right:1px solid var(--dim);width:110px;flex-shrink:0;display:flex;align-items:center;background:var(--s1)}
-    .stat-val{padding:1rem 1.25rem;display:flex;align-items:center}
-    .stat-big{font-family:var(--head);font-size:2rem;color:var(--lime);line-height:1}
-    .stat-small{font-family:var(--mono);font-size:11px;color:var(--text);letter-spacing:.05em}
+.sb-top{padding:2.2rem 1.8rem 1.6rem;position:relative;z-index:1}
 
-    /* EXPERTISE */
-    #expertise{background:var(--s1)}
-    .exp-grid{display:grid;grid-template-columns:repeat(3,1fr)}
-    .exp-card{padding:2rem 1.75rem;border-right:1px solid var(--dim);border-bottom:1px solid var(--dim);position:relative;overflow:hidden;transition:background .25s}
-    .exp-card:nth-child(3n){border-right:none}
-    .exp-card:nth-last-child(-n+3){border-bottom:none}
-    .exp-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,255,0,.03) 0%,transparent 60%);opacity:0;transition:opacity .3s}
-    .exp-card:hover{background:var(--s2)}
-    .exp-card:hover::after{opacity:1}
-    .exp-num{font-family:var(--mono);font-size:8.5px;color:var(--lime);letter-spacing:.2em;opacity:.4;margin-bottom:1.5rem}
-    .exp-title{font-family:var(--head);font-size:1.15rem;letter-spacing:.04em;color:var(--text);margin-bottom:.6rem;line-height:1.2}
-    .exp-desc{font-size:.8rem;color:var(--muted);line-height:1.7;font-weight:300}
-    .exp-tools{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:1rem}
-    .exp-tool{font-family:var(--mono);font-size:8.5px;letter-spacing:.08em;color:var(--lime);opacity:.6;background:rgba(200,255,0,.05);padding:2px 7px;border-radius:1px}
+/* Profile photo — morphing blob shape */
+.profile-wrap{width:90px;height:90px;position:relative;margin-bottom:1.3rem}
+.profile-ring{
+  position:absolute;inset:-4px;
+  border-radius:30% 70% 70% 30% / 30% 30% 70% 70%;
+  background:conic-gradient(var(--g),var(--b),var(--p),var(--g));
+  animation:morphShape 8s ease-in-out infinite,spinRing 4s linear infinite;
+  z-index:0;
+}
+@keyframes morphShape{
+  0%,100%{border-radius:30% 70% 70% 30%/30% 30% 70% 70%}
+  25%{border-radius:58% 42% 75% 25%/76% 46% 54% 24%}
+  50%{border-radius:50% 50% 33% 67%/55% 27% 73% 45%}
+  75%{border-radius:33% 67% 58% 42%/63% 68% 32% 37%}
+}
+@keyframes spinRing{to{filter:hue-rotate(360deg)}}
+.profile-pic{
+  width:90px;height:90px;object-fit:cover;
+  position:relative;z-index:1;
+  border-radius:30% 70% 70% 30%/30% 30% 70% 70%;
+  animation:morphShape 8s ease-in-out infinite;
+  box-shadow:0 0 0 3px var(--s1);
+  filter:saturate(.85) contrast(1.05);
+}
+.status-pill{
+  position:absolute;bottom:-6px;right:-10px;
+  background:var(--bg);border:1px solid var(--g);border-radius:20px;
+  padding:2px 9px;font-family:var(--mono);font-size:7.5px;
+  color:var(--g);letter-spacing:.08em;
+  display:flex;align-items:center;gap:4px;z-index:2;
+}
+.sdot{width:5px;height:5px;border-radius:50%;background:var(--g);animation:dotPulse 1.8s ease-in-out infinite}
+@keyframes dotPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,255,136,.6)}50%{box-shadow:0 0 0 5px rgba(0,255,136,0)}}
 
-    /* SKILLS */
-    #skills{background:var(--bg)}
-    .skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--dim)}
-    .skill-block{padding:1.4rem 1.75rem;border-bottom:1px solid var(--dim);border-right:1px solid var(--dim);position:relative}
-    .skill-block:nth-child(2n){border-right:none}
-    .skill-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.6rem}
-    .skill-name{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text)}
-    .skill-pct{font-family:var(--head);font-size:1.5rem;line-height:1;color:var(--lime)}
-    .skill-track{height:1px;background:var(--dim);position:relative;margin-bottom:.6rem}
-    .skill-fill{position:absolute;top:-1px;left:0;height:3px;width:0;background:var(--lime);transition:width 1.5s cubic-bezier(.16,1,.3,1)}
-    .skill-fill.alt{background:var(--cyan)}
-    .skill-fill.alt2{background:var(--orange)}
-    .skill-chips{display:flex;flex-wrap:wrap;gap:.25rem}
-    .chip{font-family:var(--mono);font-size:8.5px;letter-spacing:.05em;color:var(--muted);padding:1px 6px;background:var(--s1);border:1px solid var(--dim)}
+.sb-name{
+  font-family:var(--sans);font-size:1.15rem;font-weight:800;
+  letter-spacing:.01em;color:var(--text);line-height:1.2;
+}
+.sb-name .hi{
+  background:linear-gradient(135deg,var(--g),var(--b));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.sb-role{
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);margin-top:.35rem;
+  display:flex;align-items:center;gap:.4rem;
+}
+.sb-role::before{content:'>';color:var(--g);font-weight:bold}
+.sb-divider{height:1px;background:linear-gradient(90deg,rgba(0,255,136,.15),transparent);margin:1.3rem 0}
 
-    /* EDUCATION */
-    #education{background:var(--s1)}
-    .edu-list{display:flex;flex-direction:column;gap:0}
-    .edu-item{display:grid;grid-template-columns:160px 1fr;border:1px solid var(--dim);border-bottom:none;transition:background .2s}
-    .edu-item:last-child{border-bottom:1px solid var(--dim)}
-    .edu-item:hover{background:var(--s2)}
-    .edu-year-col{padding:1.5rem 1.25rem;border-right:1px solid var(--dim);background:var(--s2);display:flex;flex-direction:column;justify-content:center}
-    .edu-badge{display:inline-block;font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);border:1px solid rgba(255,92,43,.3);padding:2px 6px;margin-bottom:.5rem;align-self:flex-start}
-    .edu-years{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.08em}
-    .edu-content{padding:1.5rem 1.75rem}
-    .edu-title{font-family:var(--head);font-size:1.1rem;letter-spacing:.04em;color:var(--text);margin-bottom:.2rem}
-    .edu-institution{font-size:.82rem;color:var(--muted);margin-bottom:.6rem}
-    .edu-notes{font-size:.78rem;color:rgba(90,103,120,.8);line-height:1.6;font-weight:300}
+/* Nav */
+.sb-nav{flex:1;overflow-y:auto;position:relative;z-index:1;padding:.25rem 0}
+.sb-nav a{
+  display:flex;align-items:center;gap:.75rem;padding:.62rem 1.8rem;
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;position:relative;overflow:hidden;
+  transition:color .2s;
+}
+.sb-nav a .nn{font-size:8px;color:var(--g);opacity:.25;min-width:16px;transition:opacity .2s}
+.sb-nav a::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(0,255,136,.06),transparent);
+  width:0;transition:width .3s;
+}
+.sb-nav a:hover::before,.sb-nav a.active::before{width:100%}
+.sb-nav a:hover,.sb-nav a.active{color:var(--text)}
+.sb-nav a.active .nn{opacity:1}
+.sb-nav a.active{border-left:2px solid var(--g)}
 
-    /* EXPERIENCE */
-    #experience{background:var(--bg)}
-    .xp-item{display:grid;grid-template-columns:200px 1fr;border:1px solid var(--dim);border-bottom:none;transition:background .2s}
-    .xp-item:last-child{border-bottom:1px solid var(--dim)}
-    .xp-item:hover{background:rgba(26,34,48,.4)}
-    .xp-left{padding:2rem 1.5rem;border-right:1px solid var(--dim);background:var(--s1);display:flex;flex-direction:column;justify-content:flex-start}
-    .xp-type{font-family:var(--mono);font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--lime);opacity:.5;margin-bottom:.4rem}
-    .xp-period{font-family:var(--mono);font-size:9.5px;color:var(--muted);letter-spacing:.08em;margin-bottom:.5rem}
-    .xp-co{font-size:.8rem;color:var(--text);font-weight:500;line-height:1.3;margin-bottom:.3rem}
-    .xp-loc{font-family:var(--mono);font-size:8.5px;color:var(--muted);letter-spacing:.08em;opacity:.6}
-    .xp-right{padding:2rem}
-    .xp-role{font-family:var(--head);font-size:1.3rem;letter-spacing:.04em;color:var(--text);margin-bottom:.75rem}
-    .xp-bullets{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-    .xp-bullets li{font-size:.82rem;color:rgba(223,230,239,.55);line-height:1.65;font-weight:300;display:flex;gap:.6rem}
-    .xp-bullets li::before{content:'→';color:var(--lime);opacity:.5;flex-shrink:0;font-size:.75rem;margin-top:.1rem}
-    .xp-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:1rem}
-    .xp-tag{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--dim);padding:2px 7px}
+/* Footer */
+.sb-foot{padding:1.2rem 1.8rem;border-top:1px solid var(--dim);position:relative;z-index:1}
+.sb-foot p{font-family:var(--mono);font-size:8px;color:var(--muted);opacity:.4;letter-spacing:.07em;margin-bottom:.6rem}
+.sb-cta{
+  display:block;text-align:center;padding:.6rem 1rem;
+  font-family:var(--mono);font-size:9px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--bg);text-decoration:none;border-radius:5px;
+  background:linear-gradient(135deg,var(--g) 0%,var(--b) 100%);
+  position:relative;overflow:hidden;
+  transition:transform .2s,box-shadow .3s;
+}
+.sb-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,255,136,.28)}
+.sb-cta .inner{position:relative;z-index:1}
+.sb-cta::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--b),var(--p));
+  opacity:0;transition:opacity .4s;
+}
+.sb-cta:hover::before{opacity:1}
 
-    /* PROJECT */
-    #project{background:var(--s1)}
-    .project-card{border:1px solid var(--dim);display:grid;grid-template-columns:1fr 1fr;overflow:hidden;transition:border-color .2s}
-    .project-card:hover{border-color:rgba(200,255,0,.25)}
-    .proj-body{padding:2.5rem;border-right:1px solid var(--dim)}
-    .proj-badge{font-family:var(--mono);font-size:8.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(0,212,255,.2);padding:3px 9px;display:inline-block;margin-bottom:1.25rem}
-    .proj-title{font-family:var(--head);font-size:1.5rem;letter-spacing:.03em;color:var(--text);margin-bottom:.75rem;line-height:1.2}
-    .proj-desc{font-size:.85rem;color:rgba(223,230,239,.55);line-height:1.75;font-weight:300}
-    .proj-stack{padding:2.5rem}
-    .stack-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem}
-    .stack-item{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
-    .stack-dot{width:6px;height:6px;background:var(--lime);flex-shrink:0;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)}
-    .stack-dot.c2{background:var(--cyan)}
-    .stack-dot.c3{background:var(--orange)}
-    .stack-name{font-family:var(--mono);font-size:11px;color:var(--text);letter-spacing:.06em}
-    .stack-detail{font-size:.78rem;color:var(--muted);font-weight:300}
+/* ── MAIN ── */
+.main{margin-left:var(--sw);flex:1;min-width:0;position:relative;z-index:2}
 
-    /* CERTS */
-    #certs{background:var(--bg)}
-    .cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--dim);border:1px solid var(--dim)}
-    .cert-item{background:var(--bg);padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.75rem;transition:background .2s}
-    .cert-item:hover{background:var(--s1)}
-    .cert-diamond{width:8px;height:8px;background:var(--lime);flex-shrink:0;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);opacity:.6}
-    .cert-name{font-family:var(--mono);font-size:10px;color:var(--text);letter-spacing:.06em}
+/* ── SLIDER ── */
+.slider{position:relative;height:100vh;overflow:hidden}
+.slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease}
+.slide::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(108deg,rgba(4,6,10,.97) 0%,rgba(4,6,10,.72) 48%,rgba(4,6,10,.18) 100%);
+}
+/* Animated grid */
+.slide-grid{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background-image:linear-gradient(rgba(0,255,136,.022) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,255,136,.022) 1px,transparent 1px);
+  background-size:58px 58px;
+  animation:gridMove 18s linear infinite;
+}
+@keyframes gridMove{from{background-position:0 0}to{background-position:58px 58px}}
+/* Scanlines */
+.slide::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent 0px,transparent 3px,rgba(0,0,0,.05) 3px,rgba(0,0,0,.05) 4px);
+  z-index:2;
+}
+.slide.active{opacity:1}
 
-    /* CONTACT */
-    #contact{background:var(--s1)}
-    .contact-wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:start}
-    .contact-headline{font-family:var(--head);font-size:clamp(2rem,3.5vw,2.8rem);letter-spacing:.02em;line-height:1.05;color:var(--text);margin-bottom:1rem}
-    .contact-headline span{color:var(--lime)}
-    .contact-body{font-size:.88rem;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:2rem}
-    .contact-cta{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--bg);background:var(--lime);padding:.9rem 1.8rem;text-decoration:none;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:opacity .2s,transform .2s}
-    .contact-cta:hover{opacity:.88;transform:translateX(4px)}
-    .contact-rows{display:flex;flex-direction:column;gap:0}
-    .contact-row{display:flex;align-items:stretch;border:1px solid var(--dim);border-bottom:none}
-    .contact-row:last-child{border-bottom:1px solid var(--dim)}
-    .cr-label{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:1rem;border-right:1px solid var(--dim);width:100px;flex-shrink:0;display:flex;align-items:center;background:var(--s2)}
-    .cr-val{padding:1rem 1.25rem;font-family:var(--mono);font-size:11px;color:var(--text);letter-spacing:.04em;display:flex;align-items:center}
-    .cr-val.hi{color:var(--lime)}
+.slide-inner{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:center;padding:0 5.5rem}
+.slide-tag{
+  font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--g);margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem;opacity:.85;
+}
+.slide-tag::before{content:'';width:36px;height:1px;background:linear-gradient(90deg,var(--g),transparent)}
 
-    /* FOOTER */
-    .pg-footer{padding:1.5rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--dim)}
-    .pg-footer p{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.1em;opacity:.5}
-    .pg-footer span{color:var(--lime);opacity:1}
+/* Giant stacked heading */
+.hero-head{font-family:var(--sans);font-weight:800;line-height:.88;letter-spacing:-.03em;margin-bottom:1.75rem}
+.hero-head .ln{font-size:clamp(2.8rem,6vw,5.8rem);display:block}
+.hero-head .ln-fill{color:var(--text)}
+.hero-head .ln-grad{
+  background:linear-gradient(135deg,var(--g) 0%,var(--b) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 24px rgba(0,255,136,.3));
+}
+.hero-head .ln-out{
+  -webkit-text-stroke:1px rgba(255,255,255,.22);
+  color:transparent;-webkit-text-fill-color:transparent;
+}
+.hero-sub{font-size:.92rem;color:rgba(238,242,248,.38);max-width:400px;line-height:1.76;font-weight:400}
 
-    /* REVEAL */
-    .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
-    .reveal.in{opacity:1;transform:none}
+/* Floating stats panel */
+.hero-stats{
+  position:absolute;right:5rem;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:.85rem;z-index:4;
+}
+.hs{
+  background:rgba(8,13,21,.72);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(0,255,136,.12);border-radius:12px;
+  padding:.9rem 1.15rem;text-align:center;
+  transition:border-color .3s,transform .3s;
+}
+.hs:hover{border-color:rgba(0,255,136,.35);transform:scale(1.05)}
+.hs-num{
+  font-family:var(--sans);font-size:1.55rem;font-weight:800;line-height:1;
+  background:linear-gradient(135deg,var(--g),var(--b));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hs-lbl{font-family:var(--mono);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.22rem}
 
-    /* MOBILE */
-    @media(max-width:960px){
-      :root{--sw:64px}
-      .sb-top{padding:1.5rem .75rem}
-      .sb-name,.sb-role,.sb-location{display:none}
-      .profile-pic{width:42px;height:42px;clip-path:none;border-radius:2px}
-      .profile-wrap{width:42px;height:42px;margin:0 auto}
-      .sb-nav a{justify-content:center}
-      .nav-num,.nav-label{display:none}
-      .nav-bar{width:3px;height:28px}
-      .sb-foot{display:none}
-      .section{padding:3.5rem 1.5rem}
-      .about-layout,.contact-wrap{grid-template-columns:1fr}
-      .exp-grid{grid-template-columns:1fr 1fr}
-      .xp-item,.edu-item{grid-template-columns:1fr}
-      .xp-left,.edu-year-col{border-right:none;border-bottom:1px solid var(--dim)}
-      .project-card{grid-template-columns:1fr}
-      .proj-body{border-right:none;border-bottom:1px solid var(--dim)}
-      .cert-grid{grid-template-columns:1fr 1fr}
-      .skills-layout{grid-template-columns:1fr}
-      .skill-block{border-right:none}
-    }
-  </style>
+/* Slide indicators */
+.v-dots{position:absolute;right:2.2rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:10}
+.v-dot{width:2px;height:18px;background:rgba(255,255,255,.1);cursor:pointer;transition:all .35s;border-radius:2px}
+.v-dot.active{height:44px;background:var(--g);box-shadow:0 0 14px var(--g)}
+
+.s-ctrls{position:absolute;bottom:2.5rem;right:5.5rem;display:flex;z-index:10}
+.s-ctrls span{
+  width:46px;height:46px;display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.1);color:var(--muted);font-size:1.1rem;
+  cursor:pointer;user-select:none;transition:all .2s;backdrop-filter:blur(8px);
+}
+.s-ctrls span:hover{border-color:var(--g);color:var(--g);background:rgba(0,255,136,.06)}
+.s-ctrls .prev{border-right:none;border-radius:5px 0 0 5px}
+.s-ctrls .next{border-radius:0 5px 5px 0}
+.s-prog{position:absolute;bottom:0;left:0;height:2px;width:0;z-index:10;transition:width 0s;background:linear-gradient(90deg,var(--g),var(--b));box-shadow:0 0 10px var(--g)}
+.s-prog.go{transition:width 5s linear;width:100%}
+
+/* ── SECTIONS ── */
+.sec{padding:7rem 5.5rem;border-bottom:1px solid var(--dim);position:relative;overflow:hidden}
+/* Ambient corner glow */
+.sec::after{content:'';position:absolute;bottom:-80px;right:-80px;width:280px;height:280px;background:radial-gradient(circle,rgba(0,170,255,.03) 0%,transparent 70%);pointer-events:none}
+
+.s-eye{font-family:var(--mono);font-size:9px;color:var(--g);letter-spacing:.3em;text-transform:uppercase;margin-bottom:.45rem;opacity:.7}
+.s-title{
+  font-family:var(--sans);font-size:clamp(2rem,3.2vw,2.9rem);font-weight:800;
+  letter-spacing:-.02em;color:var(--text);margin-bottom:3.5rem;
+  display:inline-block;position:relative;
+}
+.s-title::after{
+  content:'';position:absolute;left:0;bottom:-8px;width:0;height:2px;
+  background:linear-gradient(90deg,var(--g),var(--b),transparent);
+  transition:width 1s ease;box-shadow:0 0 8px var(--g);
+}
+.s-title.lit::after{width:100%}
+
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .72s ease,transform .72s ease}
+.rv.in{opacity:1;transform:none}
+.rv.lft{transform:translateX(-28px)}.rv.lft.in{transform:none}
+.rv.sc{transform:scale(.94)}.rv.sc.in{transform:none}
+
+/* ── ABOUT ── */
+#about{background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:5rem;align-items:start}
+.about-text p{font-size:.93rem;color:rgba(238,242,248,.58);line-height:1.9;font-weight:400;margin-bottom:1rem}
+.about-text p strong{color:var(--text);font-weight:700}
+.tag-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.5rem}
+.atag{
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:.3rem .8rem;border-radius:100px;cursor:default;
+  border:1px solid rgba(0,255,136,.2);color:var(--g);
+  transition:all .25s;
+}
+.atag:hover{background:rgba(0,255,136,.08);border-color:var(--g);box-shadow:0 0 12px rgba(0,255,136,.2)}
+.atag.b{border-color:rgba(0,170,255,.2);color:var(--b)}
+.atag.b:hover{background:rgba(0,170,255,.08);border-color:var(--b);box-shadow:0 0 12px rgba(0,170,255,.2)}
+.atag.p{border-color:rgba(180,79,255,.2);color:var(--p)}
+.atag.p:hover{background:rgba(180,79,255,.08);border-color:var(--p);box-shadow:0 0 12px rgba(180,79,255,.2)}
+.a-links{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1.5rem}
+.alink{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);border:1px solid var(--dim);padding:.42rem .9rem;
+  text-decoration:none;border-radius:5px;transition:all .25s;overflow:hidden;position:relative;
+}
+.alink::before{content:'';position:absolute;inset:0;background:rgba(0,255,136,.05);transform:translateX(-100%);transition:transform .25s}
+.alink:hover::before{transform:translateX(0)}
+.alink:hover{color:var(--g);border-color:rgba(0,255,136,.35);transform:translateY(-2px)}
+
+/* Glass stat cards */
+.stat-cards{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.sc{
+  background:rgba(10,16,28,.65);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.06);border-radius:16px;
+  padding:1.5rem 1.25rem;position:relative;overflow:hidden;
+  transition:border-color .3s,transform .3s;
+}
+.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--g),transparent);opacity:0;transition:opacity .35s}
+.sc:hover{border-color:rgba(0,255,136,.22);transform:translateY(-3px)}
+.sc:hover::before{opacity:1}
+.sc-num{
+  font-family:var(--sans);font-size:2.2rem;font-weight:800;line-height:1;
+  background:linear-gradient(135deg,var(--g),var(--b));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.sc-num.p{background:linear-gradient(135deg,var(--p),var(--b));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sc-num.o{background:linear-gradient(135deg,var(--o),var(--p));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sc-lbl{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.35rem}
+
+/* ── EXPERTISE — 3D TILT ── */
+#expertise{background:var(--s1)}
+.exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--dim)}
+.tcard{
+  background:var(--s1);padding:2.25rem 2rem;
+  position:relative;overflow:hidden;cursor:default;
+  transition:background .3s;
+  transform-style:preserve-3d;will-change:transform;
+}
+.tcard:hover{background:var(--s2)}
+.tcard .spot{
+  position:absolute;width:220px;height:220px;
+  background:radial-gradient(circle,rgba(0,255,136,.07) 0%,transparent 70%);
+  border-radius:50%;pointer-events:none;opacity:0;transition:opacity .3s;
+  transform:translate(-50%,-50%);
+}
+.tcard:hover .spot{opacity:1}
+/* Hover top border sweep */
+.tcard::before{
+  content:'';position:absolute;top:0;left:-100%;right:100%;height:1px;
+  background:var(--g);box-shadow:0 0 8px var(--g);
+  transition:left .4s,right .4s;
+}
+.tcard:hover::before{left:0;right:0}
+.tc-n{font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;color:var(--g);opacity:.28;margin-bottom:1.5rem}
+.tc-ico{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:1rem;background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.1);transition:box-shadow .3s}
+.tcard:hover .tc-ico{box-shadow:0 0 18px rgba(0,255,136,.18)}
+.tc-ttl{font-family:var(--sans);font-size:.98rem;font-weight:700;color:var(--text);margin-bottom:.55rem}
+.tc-desc{font-size:.79rem;color:var(--muted);line-height:1.72;font-weight:400}
+.tc-tools{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.9rem}
+.tct{font-family:var(--mono);font-size:7.5px;letter-spacing:.06em;color:var(--g);opacity:.5;background:rgba(0,255,136,.04);padding:2px 7px;border:1px solid rgba(0,255,136,.1);border-radius:2px}
+
+/* ── SKILLS — NEON BARS ── */
+#skills{background:var(--bg)}
+.sk-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.75rem 5rem}
+.sk{position:relative}
+.sk-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem}
+.sk-name{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text)}
+.sk-pct{font-family:var(--sans);font-size:1.35rem;font-weight:800;line-height:1}
+.sk-pct.g{background:linear-gradient(135deg,var(--g),#00cfff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sk-pct.b{background:linear-gradient(135deg,var(--b),var(--p));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sk-pct.p{background:linear-gradient(135deg,var(--p),var(--o));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sk-track{height:3px;background:rgba(255,255,255,.06);border-radius:3px;position:relative;margin-bottom:.55rem;overflow:visible}
+.sk-fill{position:absolute;top:0;left:0;height:100%;width:0;border-radius:3px;transition:width 1.7s cubic-bezier(.16,1,.3,1)}
+.sk-fill.g{background:linear-gradient(90deg,var(--g),#00cfff);box-shadow:0 0 12px rgba(0,255,136,.5)}
+.sk-fill.b{background:linear-gradient(90deg,var(--b),var(--p));box-shadow:0 0 12px rgba(0,170,255,.5)}
+.sk-fill.p{background:linear-gradient(90deg,var(--p),var(--o));box-shadow:0 0 12px rgba(180,79,255,.5)}
+.sk-fill::after{content:'';position:absolute;right:-5px;top:-5px;width:13px;height:13px;border-radius:50%;background:inherit;filter:brightness(1.4);animation:tipPulse 1.6s ease-in-out infinite}
+@keyframes tipPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,255,136,.5)}50%{box-shadow:0 0 0 6px rgba(0,255,136,0)}}
+.sk-chips{display:flex;flex-wrap:wrap;gap:.25rem}
+.sk-chip{font-family:var(--mono);font-size:8px;letter-spacing:.04em;color:var(--muted);background:var(--s1);border:1px solid rgba(255,255,255,.05);padding:1px 6px;border-radius:2px}
+
+/* ── EDUCATION — TIMELINE ── */
+#education{background:var(--s1)}
+.edu-tl{position:relative;padding-left:2.5rem}
+.edu-tl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--g),var(--b),var(--p));opacity:.22}
+.edu-item{position:relative;padding-bottom:3.5rem}
+.edu-item:last-child{padding-bottom:0}
+.edu-dot{
+  position:absolute;left:-2.93rem;top:.35rem;
+  width:14px;height:14px;border-radius:50%;
+  border:2px solid var(--g);background:var(--bg);
+  transition:box-shadow .3s;
+}
+.edu-dot::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--g);opacity:0;transition:opacity .3s;box-shadow:0 0 8px var(--g)}
+.edu-item:hover .edu-dot{box-shadow:0 0 16px rgba(0,255,136,.5)}
+.edu-item:hover .edu-dot::after{opacity:1}
+.edu-badge{display:inline-block;font-family:var(--mono);font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--g);border:1px solid rgba(0,255,136,.25);padding:2px 8px;border-radius:3px;margin-bottom:.6rem}
+.edu-badge.done{color:var(--g);border-color:rgba(0,255,136,.3)}
+.edu-badge.dip{color:var(--b);border-color:rgba(0,170,255,.25)}
+.edu-yr{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.06em;margin-bottom:.45rem}
+.edu-ttl{font-family:var(--sans);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:.2rem}
+.edu-inst{font-size:.82rem;color:var(--muted);margin-bottom:.5rem}
+.edu-note{font-size:.78rem;color:rgba(74,90,114,.8);line-height:1.65}
+
+/* ── EXPERIENCE ── */
+#experience{background:var(--bg)}
+.xp-wrap{display:flex;flex-direction:column}
+.xp-item{
+  display:grid;grid-template-columns:185px 1fr;
+  border:1px solid var(--dim);border-bottom:none;
+  position:relative;transition:border-color .3s;
+}
+.xp-item:last-child{border-bottom:1px solid var(--dim)}
+.xp-item:hover{border-color:rgba(0,255,136,.14)}
+.xp-item::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:linear-gradient(to bottom,var(--g),var(--b));
+  opacity:0;transition:opacity .3s;
+}
+.xp-item:hover::before{opacity:.7}
+.xp-left{padding:2rem 1.5rem;border-right:1px solid var(--dim);background:rgba(0,0,0,.12);display:flex;flex-direction:column}
+.xp-type{font-family:var(--mono);font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--g);opacity:.45;margin-bottom:.3rem}
+.xp-period{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.05em;margin-bottom:.4rem}
+.xp-co{font-size:.82rem;color:var(--text);font-weight:600;margin-bottom:.2rem;line-height:1.3}
+.xp-loc{font-family:var(--mono);font-size:7.5px;color:var(--muted);opacity:.5}
+.xp-right{padding:2rem}
+.xp-role{font-family:var(--sans);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:.7rem}
+.xp-ul{list-style:none;display:flex;flex-direction:column;gap:.38rem}
+.xp-ul li{font-size:.81rem;color:rgba(238,242,248,.48);line-height:1.68;display:flex;gap:.55rem}
+.xp-ul li::before{content:'▸';color:var(--g);opacity:.55;flex-shrink:0;font-size:.7rem;margin-top:.15rem}
+.xp-tags{display:flex;flex-wrap:wrap;gap:.28rem;margin-top:.85rem}
+.xp-tag{font-family:var(--mono);font-size:7.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);border:1px solid var(--dim);padding:2px 6px;border-radius:2px}
+
+/* ── PROJECT ── */
+#project{background:var(--s1)}
+.proj-card{
+  background:rgba(10,16,28,.6);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(0,255,136,.12);border-radius:18px;
+  overflow:hidden;display:grid;grid-template-columns:1.1fr 1fr;
+  position:relative;transition:border-color .4s,box-shadow .4s;
+}
+.proj-card:hover{border-color:rgba(0,255,136,.3);box-shadow:0 0 60px rgba(0,255,136,.06)}
+.proj-card::before{content:'';position:absolute;top:-50px;left:-50px;width:180px;height:180px;background:radial-gradient(circle,rgba(0,255,136,.07) 0%,transparent 70%);pointer-events:none}
+.proj-card::after{content:'';position:absolute;bottom:-50px;right:-50px;width:180px;height:180px;background:radial-gradient(circle,rgba(0,170,255,.05) 0%,transparent 70%);pointer-events:none}
+.proj-body{padding:3rem;border-right:1px solid rgba(0,255,136,.07);position:relative;z-index:1}
+.proj-badge{font-family:var(--mono);font-size:8.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--b);border:1px solid rgba(0,170,255,.22);padding:3px 10px;border-radius:3px;display:inline-block;margin-bottom:1.2rem}
+.proj-ttl{font-family:var(--sans);font-size:1.45rem;font-weight:800;color:var(--text);margin-bottom:.75rem;line-height:1.25;letter-spacing:-.01em}
+.proj-desc{font-size:.83rem;color:rgba(238,242,248,.48);line-height:1.8}
+.proj-stack{padding:3rem;position:relative;z-index:1}
+.ps-lbl{font-family:var(--mono);font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem}
+.ps-item{display:flex;align-items:center;gap:.8rem;margin-bottom:1.1rem}
+.ps-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ps-dot.g{background:var(--g);box-shadow:0 0 8px var(--g)}
+.ps-dot.b{background:var(--b);box-shadow:0 0 8px var(--b)}
+.ps-dot.p{background:var(--p);box-shadow:0 0 8px var(--p)}
+.ps-dot.o{background:var(--o);box-shadow:0 0 8px var(--o)}
+.ps-name{font-family:var(--mono);font-size:10.5px;color:var(--text);letter-spacing:.05em}
+.ps-desc{font-size:.77rem;color:var(--muted)}
+
+/* ── CERTS ── */
+#certs{background:var(--bg)}
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+.cert-card{
+  background:rgba(10,16,28,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--dim);border-radius:12px;
+  padding:1.1rem 1.2rem;display:flex;align-items:center;gap:.7rem;
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.cert-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,255,136,.04),transparent);opacity:0;transition:opacity .3s}
+.cert-card:hover{border-color:rgba(0,255,136,.25);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,255,136,.08)}
+.cert-card:hover::before{opacity:1}
+.cert-ico{font-size:16px;flex-shrink:0}
+.cert-name{font-family:var(--mono);font-size:9.5px;color:var(--text);letter-spacing:.04em;line-height:1.4}
+
+/* ── CONTACT ── */
+#contact{background:var(--s1)}
+.contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:5rem;align-items:start}
+.c-hl{font-family:var(--sans);font-size:clamp(2rem,3.2vw,2.9rem);font-weight:800;letter-spacing:-.02em;line-height:1.05;color:var(--text);margin-bottom:1rem}
+.c-hl .grd{background:linear-gradient(135deg,var(--g),var(--b));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.c-body{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:2rem}
+.c-btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--bg);text-decoration:none;padding:.9rem 2rem;border-radius:6px;
+  background:linear-gradient(135deg,var(--g),var(--b));
+  transition:transform .25s,box-shadow .3s;
+  position:relative;overflow:hidden;
+}
+.c-btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,255,136,.28)}
+.c-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--b),var(--p));opacity:0;transition:opacity .4s}
+.c-btn:hover::before{opacity:1}
+.c-btn span{position:relative;z-index:1}
+.c-rows{display:flex;flex-direction:column;gap:.6rem}
+.crow{
+  display:flex;align-items:center;gap:1rem;
+  background:rgba(10,16,28,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--dim);border-radius:12px;padding:1rem 1.2rem;
+  transition:all .3s;
+}
+.crow:hover{border-color:rgba(0,255,136,.2);transform:translateX(5px)}
+.crow-ico{width:34px;height:34px;border-radius:8px;background:rgba(0,255,136,.07);border:1px solid rgba(0,255,136,.14);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.crow-lbl{font-family:var(--mono);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:block}
+.crow-val{font-family:var(--mono);font-size:11px;color:var(--text);letter-spacing:.04em;display:block;margin-top:1px}
+.crow-val.hi{color:var(--g)}
+
+/* ── FOOTER ── */
+.pg-foot{padding:1.5rem 5.5rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--dim)}
+.pg-foot p{font-family:var(--mono);font-size:8.5px;color:var(--muted);opacity:.38;letter-spacing:.1em}
+.pg-foot .hl{color:var(--g);opacity:1}
+
+/* ── MOBILE ── */
+@media(max-width:960px){
+  :root{--sw:58px}
+  body{cursor:auto}
+  #cur,#cur-ring{display:none}
+  .sb-top{padding:1rem .5rem}
+  .sb-name,.sb-role,.sb-divider,.sb-foot p{display:none}
+  .profile-wrap{width:38px;height:38px;margin:0 auto .5rem}
+  .profile-pic,.profile-ring{width:38px;height:38px}
+  .sb-nav a{justify-content:center;padding:.58rem}
+  .sb-nav a .nn,.sb-nav a span:last-child{display:none}
+  .sb-foot{padding:.6rem .4rem}
+  .sb-cta .inner{font-size:7px}
+  .sec{padding:3.5rem 1.25rem}
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  .exp-grid,.cert-grid{grid-template-columns:1fr 1fr}
+  .xp-item{grid-template-columns:1fr}
+  .xp-left{border-right:none;border-bottom:1px solid var(--dim)}
+  .proj-card{grid-template-columns:1fr}
+  .proj-body{border-right:none;border-bottom:1px solid rgba(0,255,136,.07)}
+  .sk-grid{grid-template-columns:1fr}
+  .hero-stats{display:none}
+  .slide-inner{padding:0 1.5rem}
+  .s-ctrls{right:1.5rem}
+}
+</style>
 </head>
 <body>
 
+<!-- Custom cursor -->
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- Aurora blobs -->
+<div class="aurora">
+  <div class="ab ab1"></div>
+  <div class="ab ab2"></div>
+  <div class="ab ab3"></div>
+</div>
+<div class="grain"></div>
+
+<!-- ════ SIDEBAR ════ -->
 <aside class="sidebar">
+  <div class="sb-grid"></div>
   <div class="sb-top">
     <div class="profile-wrap">
-      <img src="images/profile.jpg" alt="Mohammad Rashed" class="profile-pic" />
+      <div class="profile-ring"></div>
+      <img src="images/profile.jpg" alt="Mohammad Rashed" class="profile-pic"/>
+      <div class="status-pill"><span class="sdot"></span>Available</div>
     </div>
-    <div class="sb-name" style="margin-top:1rem">MOHAMMAD<br><span>RASHED</span></div>
+    <div class="sb-name" style="margin-top:1rem">Mohammad<br><span class="hi">Rashed</span></div>
     <p class="sb-role">IT Professional</p>
-    <p class="sb-location">Adelaide, SA · Australia</p>
+    <div class="sb-divider"></div>
   </div>
   <nav class="sb-nav">
-    <a href="#home" class="active"><span class="nav-num">01</span><span class="nav-bar"></span><span class="nav-label">Home</span></a>
-    <a href="#about"><span class="nav-num">02</span><span class="nav-bar"></span><span class="nav-label">About</span></a>
-    <a href="#expertise"><span class="nav-num">03</span><span class="nav-bar"></span><span class="nav-label">Expertise</span></a>
-    <a href="#skills"><span class="nav-num">04</span><span class="nav-bar"></span><span class="nav-label">Skills</span></a>
-    <a href="#education"><span class="nav-num">05</span><span class="nav-bar"></span><span class="nav-label">Education</span></a>
-    <a href="#experience"><span class="nav-num">06</span><span class="nav-bar"></span><span class="nav-label">Experience</span></a>
-    <a href="#project"><span class="nav-num">07</span><span class="nav-bar"></span><span class="nav-label">Project</span></a>
-    <a href="#certs"><span class="nav-num">08</span><span class="nav-bar"></span><span class="nav-label">Certs</span></a>
-    <a href="#contact"><span class="nav-num">09</span><span class="nav-bar"></span><span class="nav-label">Contact</span></a>
+    <a href="#home" class="active"><span class="nn">01</span><span>Home</span></a>
+    <a href="#about"><span class="nn">02</span><span>About</span></a>
+    <a href="#expertise"><span class="nn">03</span><span>Expertise</span></a>
+    <a href="#skills"><span class="nn">04</span><span>Skills</span></a>
+    <a href="#education"><span class="nn">05</span><span>Education</span></a>
+    <a href="#experience"><span class="nn">06</span><span>Experience</span></a>
+    <a href="#project"><span class="nn">07</span><span>Project</span></a>
+    <a href="#certs"><span class="nn">08</span><span>Certs</span></a>
+    <a href="#contact"><span class="nn">09</span><span>Contact</span></a>
   </nav>
   <footer class="sb-foot">
     <p>&copy; 2025 All rights reserved.</p>
-    <a href="mailto:shoikot.dhk@gmail.com" class="sb-email">E-Mail Me</a>
+    <a href="mailto:shoikot.dhk@gmail.com" class="sb-cta"><span class="inner">✉ Email Me</span></a>
   </footer>
 </aside>
 
+<!-- ════ MAIN ════ -->
 <div class="main">
 
   <!-- SLIDER -->
   <section class="slider" id="home">
     <div class="slide active" style="background-image:url('images/slide1.jpg')">
+      <div class="slide-grid"></div>
       <div class="slide-inner">
-        <div class="slide-tag">IT Professional · Adelaide SA</div>
-        <h1 class="slide-h1">Network &amp;<br><em>Security</em><br>Expert</h1>
-        <p class="slide-sub">Designing resilient infrastructure and securing enterprise systems for a connected world.</p>
+        <div class="slide-tag">Network &amp; Security Graduate · Adelaide SA</div>
+        <div class="hero-head">
+          <span class="ln ln-out">Building</span>
+          <span class="ln ln-grad">Secure</span>
+          <span class="ln ln-fill">Networks</span>
+        </div>
+        <p class="hero-sub">Fresh IT graduate already hands-on — supporting enterprise systems, configuring networks, and getting things done.</p>
+      </div>
+      <div class="hero-stats">
+        <div class="hs"><div class="hs-num">BIT</div><div class="hs-lbl">Graduate ✓</div></div>
+        <div class="hs"><div class="hs-num">ACS</div><div class="hs-lbl">Prof. Year ✓</div></div>
+        <div class="hs"><div class="hs-num">6+</div><div class="hs-lbl">Roles Held</div></div>
       </div>
     </div>
     <div class="slide" style="background-image:url('images/slide2.jpg')">
+      <div class="slide-grid"></div>
       <div class="slide-inner">
-        <div class="slide-tag">Networking · Cloud · ERP Support</div>
-        <h1 class="slide-h1">Systems<br><em>Support</em><br>Coordinator</h1>
-        <p class="slide-sub">Supporting enterprise platforms for Coca-Cola, McDonald's &amp; Asahi Beverages at Hoshizaki Lancer.</p>
+        <div class="slide-tag">Currently · Hoshizaki Lancer Pty Ltd</div>
+        <div class="hero-head">
+          <span class="ln ln-out">Systems</span>
+          <span class="ln ln-grad">Support</span>
+          <span class="ln ln-fill">&amp; IT</span>
+        </div>
+        <p class="hero-sub">ERP, Power BI and CRM coordination for Coca-Cola, McDonald's &amp; Asahi Beverages — real enterprise experience.</p>
+      </div>
+      <div class="hero-stats">
+        <div class="hs"><div class="hs-num">ERP</div><div class="hs-lbl">Infor LN</div></div>
+        <div class="hs"><div class="hs-num">BI</div><div class="hs-lbl">Power BI</div></div>
+        <div class="hs"><div class="hs-num">SA</div><div class="hs-lbl">Adelaide</div></div>
       </div>
     </div>
     <div class="slide" style="background-image:url('images/slide3.jpg')">
+      <div class="slide-grid"></div>
       <div class="slide-inner">
-        <div class="slide-tag">BIT Networking &amp; Security · Federation University</div>
-        <h1 class="slide-h1">Your Trusted<br><em>IT</em><br>Specialist</h1>
-        <p class="slide-sub">From helpdesk to complex infrastructure — reliable, precise, and professional.</p>
+        <div class="slide-tag">Federation University Australia · 2024</div>
+        <div class="hero-head">
+          <span class="ln ln-out">Eager</span>
+          <span class="ln ln-grad">To Learn,</span>
+          <span class="ln ln-fill">To Grow</span>
+        </div>
+        <p class="hero-sub">Driven by curiosity and a genuine love for IT — always ready to solve the next problem and contribute to a great team.</p>
+      </div>
+      <div class="hero-stats">
+        <div class="hs"><div class="hs-num">IT</div><div class="hs-lbl">Security Focus</div></div>
+        <div class="hs"><div class="hs-num">AU</div><div class="hs-lbl">Work Rights</div></div>
+        <div class="hs"><div class="hs-num">∞</div><div class="hs-lbl">Curious</div></div>
       </div>
     </div>
-    <div class="slide-dots">
-      <div class="slide-dot active" onclick="goSlide(0)"></div>
-      <div class="slide-dot" onclick="goSlide(1)"></div>
-      <div class="slide-dot" onclick="goSlide(2)"></div>
+    <div class="v-dots">
+      <div class="v-dot active" onclick="goSlide(0)"></div>
+      <div class="v-dot" onclick="goSlide(1)"></div>
+      <div class="v-dot" onclick="goSlide(2)"></div>
     </div>
-    <div class="slider-controls">
+    <div class="s-ctrls">
       <span class="prev" onclick="prevSlide()">&#10094;</span>
       <span class="next" onclick="nextSlide()">&#10095;</span>
     </div>
-    <div class="slide-progress" id="sprogress"></div>
+    <div class="s-prog" id="sprog"></div>
   </section>
 
   <!-- ABOUT -->
-  <section class="section" id="about">
-    <div class="sec-eyebrow">02 — About</div>
-    <h2 class="sec-title">Who I Am</h2>
-    <div class="about-layout">
-      <div class="about-body reveal">
-        <p>I'm <strong>Mohammad Rashed</strong>, a reliable and adaptable IT professional based in <strong>Adelaide, South Australia</strong> with hands-on experience across tech support, networking, cybersecurity, and cloud systems.</p>
-        <p>Currently working as a <strong>Customer &amp; Systems Support Coordinator at Hoshizaki Lancer Pty Ltd</strong>, I support enterprise platforms like Infor LN ERP and Power BI for major clients including Coca-Cola, McDonald's, and Asahi Beverages.</p>
-        <p>I hold a <strong>Bachelor of Information Technology (Networking &amp; Security)</strong> from Federation University Australia and am completing an <strong>ACS-recognised Professional Year Program in ICT</strong>. I enjoy solving problems, keeping systems running smoothly, and communicating clearly under pressure.</p>
-        <div class="about-links">
-          <a href="https://linkedin.com/in/mdharashed" target="_blank" class="about-link">↗ LinkedIn</a>
-          <a href="https://mrashed17.github.io/portfolio/" target="_blank" class="about-link">↗ Portfolio</a>
-          <a href="tel:+61475863581" class="about-link">↗ +61 475 863 581</a>
+  <section class="sec" id="about">
+    <div class="s-eye">02 — about</div>
+    <h2 class="s-title">Who I Am</h2>
+    <div class="about-grid">
+      <div class="about-text rv lft">
+        <p>Hey, I'm <strong>Mohammad Rashed</strong> — an IT graduate from <strong>Adelaide, South Australia</strong> who's passionate about networking, security, and making systems actually work.</p>
+        <p>I've completed my <strong>Bachelor of IT (Networking &amp; Security)</strong> at Federation University and my <strong>ACS Professional Year in ICT</strong> — both done. I've already had real experience across IT network support, ERP system coordination, and team leadership, so I'm not starting from zero.</p>
+        <p>I'm the kind of person who genuinely enjoys digging into a tricky network issue, figuring out why it broke, and making sure it doesn't happen again. I work well in teams, communicate clearly, and I'm always looking to learn more.</p>
+        <div class="tag-row">
+          <span class="atag">Networking</span>
+          <span class="atag">Cybersecurity</span>
+          <span class="atag b">Azure</span>
+          <span class="atag b">AWS</span>
+          <span class="atag">Windows Server</span>
+          <span class="atag p">Python</span>
+          <span class="atag">Linux</span>
+          <span class="atag b">Power BI</span>
+          <span class="atag p">SQL</span>
+          <span class="atag">Cisco / CCNA</span>
+        </div>
+        <div class="a-links">
+          <a href="https://linkedin.com/in/mdharashed" target="_blank" class="alink">↗ LinkedIn</a>
+          <a href="https://mrashed17.github.io/portfolio/" target="_blank" class="alink">↗ Portfolio</a>
+          <a href="mailto:shoikot.dhk@gmail.com" class="alink">↗ Email</a>
         </div>
       </div>
-      <div class="stat-panel reveal">
-        <div class="stat-row"><div class="stat-key">Location</div><div class="stat-val"><span class="stat-small">Adelaide, SA 5108</span></div></div>
-        <div class="stat-row"><div class="stat-key">Experience</div><div class="stat-val"><span class="stat-big">6+</span></div></div>
-        <div class="stat-row"><div class="stat-key">Degree</div><div class="stat-val"><span class="stat-small">BIT Networking &amp; Security</span></div></div>
-        <div class="stat-row"><div class="stat-key">Prof. Year</div><div class="stat-val"><span class="stat-small">ACS ICT 2025–26</span></div></div>
-        <div class="stat-row"><div class="stat-key">Status</div><div class="stat-val"><span class="stat-small" style="color:var(--lime)">Open to Roles</span></div></div>
+      <div class="stat-cards rv">
+        <div class="sc"><div class="sc-num">BIT</div><div class="sc-lbl">Networking &amp; Security — Done ✓</div></div>
+        <div class="sc"><div class="sc-num">ACS</div><div class="sc-lbl">Prof. Year ICT — Done ✓</div></div>
+        <div class="sc"><div class="sc-num p">6+</div><div class="sc-lbl">Roles &amp; Positions Held</div></div>
+        <div class="sc"><div class="sc-num o">AU</div><div class="sc-lbl">Adelaide SA · Full Work Rights</div></div>
       </div>
     </div>
   </section>
 
   <!-- EXPERTISE -->
-  <section class="section" id="expertise">
-    <div class="sec-eyebrow">03 — Expertise</div>
-    <h2 class="sec-title">What I Do</h2>
+  <section class="sec" id="expertise">
+    <div class="s-eye">03 — expertise</div>
+    <h2 class="s-title">What I Can Do</h2>
     <div class="exp-grid">
-      <div class="exp-card reveal"><div class="exp-num">01</div><div class="exp-title">IT Service Management</div><p class="exp-desc">ERP system support, CRM management, SLA adherence, ServiceNow ticketing, and KB documentation for enterprise clients.</p><div class="exp-tools"><span class="exp-tool">Infor LN</span><span class="exp-tool">ServiceNow</span><span class="exp-tool">CRM</span><span class="exp-tool">Power BI</span></div></div>
-      <div class="exp-card reveal"><div class="exp-num">02</div><div class="exp-title">Networking &amp; Infrastructure</div><p class="exp-desc">TCP/IP, DNS, DHCP, VPNs, VLANs, routers and switches configuration, network diagnostics and Windows Server.</p><div class="exp-tools"><span class="exp-tool">Cisco</span><span class="exp-tool">VLANs</span><span class="exp-tool">VPN</span><span class="exp-tool">Windows Server</span></div></div>
-      <div class="exp-card reveal"><div class="exp-num">03</div><div class="exp-title">Cloud &amp; Security</div><p class="exp-desc">Microsoft 365, Active Directory, Microsoft Defender, AWS and Azure, endpoint security, and compliance frameworks.</p><div class="exp-tools"><span class="exp-tool">Azure</span><span class="exp-tool">AWS</span><span class="exp-tool">MS 365</span><span class="exp-tool">Defender</span></div></div>
-      <div class="exp-card reveal"><div class="exp-num">04</div><div class="exp-title">Data &amp; Analysis</div><p class="exp-desc">Data validation and integrity, Wireshark packet analysis, process gap analysis, Power BI dashboards, SQL.</p><div class="exp-tools"><span class="exp-tool">Wireshark</span><span class="exp-tool">Power BI</span><span class="exp-tool">SQL</span><span class="exp-tool">Excel</span></div></div>
-      <div class="exp-card reveal"><div class="exp-num">05</div><div class="exp-title">OS &amp; End-User Support</div><p class="exp-desc">Windows 10/11 expert-level, Linux intermediate, device setup, hardware troubleshooting, Tier 1–3 escalation.</p><div class="exp-tools"><span class="exp-tool">Windows 11</span><span class="exp-tool">Linux</span><span class="exp-tool">Tier 3</span></div></div>
-      <div class="exp-card reveal"><div class="exp-num">06</div><div class="exp-title">Automation &amp; Dev Tools</div><p class="exp-desc">Python scripting and basic automation, GitHub version control, SharePoint, Jira, Trello, Teams workflows.</p><div class="exp-tools"><span class="exp-tool">Python</span><span class="exp-tool">GitHub</span><span class="exp-tool">Jira</span><span class="exp-tool">SharePoint</span></div></div>
+      <div class="tcard rv"><div class="spot"></div><div class="tc-n">[ 01 ]</div><div class="tc-ico">🌐</div><div class="tc-ttl">Networking &amp; Infrastructure</div><p class="tc-desc">TCP/IP, DNS, DHCP, VLANs, VPNs and basic router/switch config. Studied under CCNA and applied in real support roles.</p><div class="tc-tools"><span class="tct">Cisco</span><span class="tct">VLANs</span><span class="tct">VPN</span><span class="tct">DNS/DHCP</span></div></div>
+      <div class="tcard rv"><div class="spot"></div><div class="tc-n">[ 02 ]</div><div class="tc-ico">🔒</div><div class="tc-ttl">Cybersecurity</div><p class="tc-desc">Firewalls, IDS/IPS, pen testing basics, OWASP Top 10, cryptography and cloud security — all covered at university level.</p><div class="tc-tools"><span class="tct">Firewalls</span><span class="tct">IDS/IPS</span><span class="tct">Pen Testing</span><span class="tct">OWASP</span></div></div>
+      <div class="tcard rv"><div class="spot"></div><div class="tc-n">[ 03 ]</div><div class="tc-ico">☁️</div><div class="tc-ttl">Cloud &amp; Security Basics</div><p class="tc-desc">Azure, AWS, Microsoft 365 and Active Directory — foundational knowledge from university and hands-on at work.</p><div class="tc-tools"><span class="tct">Azure</span><span class="tct">AWS</span><span class="tct">MS 365</span><span class="tct">AD</span></div></div>
+      <div class="tcard rv"><div class="spot"></div><div class="tc-n">[ 04 ]</div><div class="tc-ico">🖥️</div><div class="tc-ttl">IT Support &amp; End-User</div><p class="tc-desc">Tier 1–3 support for Windows 10/11 and Linux, device setup, hardware troubleshooting in real workplaces.</p><div class="tc-tools"><span class="tct">Windows 11</span><span class="tct">Linux</span><span class="tct">Hardware</span><span class="tct">SLA</span></div></div>
+      <div class="tcard rv"><div class="spot"></div><div class="tc-n">[ 05 ]</div><div class="tc-ico">📊</div><div class="tc-ttl">ERP, ITSM &amp; Data</div><p class="tc-desc">Supporting Infor LN, ServiceNow and Power BI. Data validation, dashboards and reporting for cross-functional teams.</p><div class="tc-tools"><span class="tct">Infor LN</span><span class="tct">ServiceNow</span><span class="tct">Power BI</span><span class="tct">SQL</span></div></div>
+      <div class="tcard rv"><div class="spot"></div><div class="tc-n">[ 06 ]</div><div class="tc-ico">⚙️</div><div class="tc-ttl">Scripting &amp; Dev Tools</div><p class="tc-desc">Basic Python scripting and automation, GitHub version control, plus Jira, Trello, SharePoint and Microsoft Teams.</p><div class="tc-tools"><span class="tct">Python</span><span class="tct">GitHub</span><span class="tct">Jira</span><span class="tct">Bash</span></div></div>
     </div>
   </section>
 
   <!-- SKILLS -->
-  <section class="section" id="skills">
-    <div class="sec-eyebrow">04 — Skills</div>
-    <h2 class="sec-title">Technical Proficiency</h2>
-    <div class="skills-layout">
-      <div class="skill-block reveal" data-pct="92"><div class="skill-header"><span class="skill-name">Networking &amp; Infrastructure</span><span class="skill-pct">92%</span></div><div class="skill-track"><div class="skill-fill"></div></div><div class="skill-chips"><span class="chip">TCP/IP</span><span class="chip">DNS/DHCP</span><span class="chip">VLANs</span><span class="chip">VPN</span><span class="chip">CCNA</span></div></div>
-      <div class="skill-block reveal" data-pct="88"><div class="skill-header"><span class="skill-name">Windows Server &amp; AD</span><span class="skill-pct">88%</span></div><div class="skill-track"><div class="skill-fill alt"></div></div><div class="skill-chips"><span class="chip">AD DS</span><span class="chip">GPO</span><span class="chip">DNS</span><span class="chip">Windows 10/11</span></div></div>
-      <div class="skill-block reveal" data-pct="85"><div class="skill-header"><span class="skill-name">Cybersecurity</span><span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-fill"></div></div><div class="skill-chips"><span class="chip">Firewalls</span><span class="chip">IDS/IPS</span><span class="chip">Pen Testing</span><span class="chip">Cryptography</span></div></div>
-      <div class="skill-block reveal" data-pct="80"><div class="skill-header"><span class="skill-name">Cloud (Azure / AWS)</span><span class="skill-pct">80%</span></div><div class="skill-track"><div class="skill-fill alt2"></div></div><div class="skill-chips"><span class="chip">Azure</span><span class="chip">AWS</span><span class="chip">MS 365</span><span class="chip">Cloud Security</span></div></div>
-      <div class="skill-block reveal" data-pct="85"><div class="skill-header"><span class="skill-name">ERP &amp; ITSM</span><span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-fill alt"></div></div><div class="skill-chips"><span class="chip">Infor LN</span><span class="chip">ServiceNow</span><span class="chip">Power BI</span><span class="chip">CRM</span></div></div>
-      <div class="skill-block reveal" data-pct="72"><div class="skill-header"><span class="skill-name">Python &amp; Automation</span><span class="skill-pct">72%</span></div><div class="skill-track"><div class="skill-fill alt2"></div></div><div class="skill-chips"><span class="chip">Python</span><span class="chip">Scripting</span><span class="chip">GitHub</span><span class="chip">Bash</span></div></div>
+  <section class="sec" id="skills">
+    <div class="s-eye">04 — skills</div>
+    <h2 class="s-title">Technical Level</h2>
+    <div class="sk-grid">
+      <div class="sk rv" data-pct="85"><div class="sk-head"><span class="sk-name">Networking &amp; Infrastructure</span><span class="sk-pct g">85%</span></div><div class="sk-track"><div class="sk-fill g"></div></div><div class="sk-chips"><span class="sk-chip">TCP/IP</span><span class="sk-chip">DNS/DHCP</span><span class="sk-chip">VLANs</span><span class="sk-chip">VPN</span><span class="sk-chip">CCNA</span></div></div>
+      <div class="sk rv" data-pct="78"><div class="sk-head"><span class="sk-name">Windows Server &amp; AD</span><span class="sk-pct b">78%</span></div><div class="sk-track"><div class="sk-fill b"></div></div><div class="sk-chips"><span class="sk-chip">AD DS</span><span class="sk-chip">GPO</span><span class="sk-chip">Windows 11</span></div></div>
+      <div class="sk rv" data-pct="75"><div class="sk-head"><span class="sk-name">Cybersecurity</span><span class="sk-pct g">75%</span></div><div class="sk-track"><div class="sk-fill g"></div></div><div class="sk-chips"><span class="sk-chip">Firewalls</span><span class="sk-chip">IDS/IPS</span><span class="sk-chip">Pen Testing</span></div></div>
+      <div class="sk rv" data-pct="68"><div class="sk-head"><span class="sk-name">Cloud — Azure / AWS</span><span class="sk-pct b">68%</span></div><div class="sk-track"><div class="sk-fill b"></div></div><div class="sk-chips"><span class="sk-chip">Azure</span><span class="sk-chip">AWS</span><span class="sk-chip">MS 365</span></div></div>
+      <div class="sk rv" data-pct="78"><div class="sk-head"><span class="sk-name">ERP &amp; ITSM Platforms</span><span class="sk-pct p">78%</span></div><div class="sk-track"><div class="sk-fill p"></div></div><div class="sk-chips"><span class="sk-chip">Infor LN</span><span class="sk-chip">ServiceNow</span><span class="sk-chip">Power BI</span></div></div>
+      <div class="sk rv" data-pct="60"><div class="sk-head"><span class="sk-name">Python &amp; Scripting</span><span class="sk-pct p">60%</span></div><div class="sk-track"><div class="sk-fill p"></div></div><div class="sk-chips"><span class="sk-chip">Python</span><span class="sk-chip">Bash</span><span class="sk-chip">GitHub</span></div></div>
     </div>
   </section>
 
   <!-- EDUCATION -->
-  <section class="section" id="education">
-    <div class="sec-eyebrow">05 — Education</div>
-    <h2 class="sec-title">Academic Background</h2>
-    <div class="edu-list">
-      <div class="edu-item reveal">
-        <div class="edu-year-col"><span class="edu-badge">Current</span><span class="edu-years">Apr 2025 — Feb 2026</span></div>
-        <div class="edu-content"><div class="edu-title">Professional Year Program — ICT</div><div class="edu-institution">Academy IT · Adelaide, Australia</div><div class="edu-notes">ACS-recognised program focused on workplace communication, industry standards and Australian business practices. Developing skills in business systems, stakeholder engagement, and ICT support through structured training and internship components.</div></div>
+  <section class="sec" id="education">
+    <div class="s-eye">05 — education</div>
+    <h2 class="s-title">Academic Background</h2>
+    <div class="edu-tl">
+      <div class="edu-item rv">
+        <div class="edu-dot"></div>
+        <span class="edu-badge done">✓ Completed</span>
+        <div class="edu-yr">Apr 2025 – Feb 2026</div>
+        <div class="edu-ttl">Professional Year Program — ICT</div>
+        <div class="edu-inst">Academy IT · Adelaide, Australia</div>
+        <div class="edu-note">ACS-recognised program covering workplace communication, industry standards and Australian business practices. Includes structured training, stakeholder engagement and an internship component. Completed.</div>
       </div>
-      <div class="edu-item reveal">
-        <div class="edu-year-col"><span class="edu-badge">Degree</span><span class="edu-years">Feb 2023 — Nov 2024</span></div>
-        <div class="edu-content"><div class="edu-title">Bachelor of Information Technology (Networking &amp; Security)</div><div class="edu-institution">Federation University Australia · Adelaide</div><div class="edu-notes">Cybersecurity &amp; Ethical Hacking · Penetration Testing · Firewalls, IDS/IPS, VPNs · Cloud Security (AWS/Azure) · Database Security (OWASP Top 10, DevSecOps) · Secure OS Management</div></div>
+      <div class="edu-item rv">
+        <div class="edu-dot"></div>
+        <span class="edu-badge done">✓ Completed</span>
+        <div class="edu-yr">Feb 2023 – Nov 2024</div>
+        <div class="edu-ttl">Bachelor of IT — Networking &amp; Security</div>
+        <div class="edu-inst">Federation University Australia · Adelaide</div>
+        <div class="edu-note">Cybersecurity &amp; Ethical Hacking · Penetration Testing · Firewalls, IDS/IPS, VPNs · Cloud Security (AWS/Azure) · Database Security &amp; DevSecOps · Secure OS Management</div>
       </div>
-      <div class="edu-item reveal">
-        <div class="edu-year-col"><span class="edu-badge">Diploma</span><span class="edu-years">Sep 2016 — Oct 2018</span></div>
-        <div class="edu-content"><div class="edu-title">Diploma in Information Technology</div><div class="edu-institution">YES International College · Kuala Lumpur, Malaysia</div><div class="edu-notes">IT System Design &amp; Development · Network Deployment &amp; Security · Wired and wireless network security techniques.</div></div>
+      <div class="edu-item rv">
+        <div class="edu-dot"></div>
+        <span class="edu-badge dip">Diploma</span>
+        <div class="edu-yr">Sep 2016 – Oct 2018</div>
+        <div class="edu-ttl">Diploma in Information Technology</div>
+        <div class="edu-inst">YES International College · Kuala Lumpur, Malaysia</div>
+        <div class="edu-note">IT System Design &amp; Development · Network Deployment &amp; Security · Wired and wireless network security fundamentals.</div>
       </div>
     </div>
   </section>
 
   <!-- EXPERIENCE -->
-  <section class="section" id="experience">
-    <div class="sec-eyebrow">06 — Experience</div>
-    <h2 class="sec-title">Career History</h2>
-    <div class="xp-list">
-      <div class="xp-item reveal">
-        <div class="xp-left"><span class="xp-type">Current Role</span><span class="xp-period">Apr 2025 — Present</span><span class="xp-co">Hoshizaki Lancer Pty Ltd</span><span class="xp-loc">Adelaide, SA</span></div>
-        <div class="xp-right"><div class="xp-role">Customer &amp; Systems Support Coordinator</div><ul class="xp-bullets"><li>Application &amp; system support for Infor LN ERP, Power BI and CRM — clients include Coca-Cola, McDonald's, and Asahi Beverages.</li><li>Troubleshoot system issues, resolve discrepancies, escalate unresolved errors to IT specialists.</li><li>Streamlined ERP and reporting processes via automation and data validation, reducing manual errors and improving management insights.</li><li>Use Power BI dashboards to track order status, monitor variances, and deliver reporting insights.</li></ul><div class="xp-tags"><span class="xp-tag">Infor LN ERP</span><span class="xp-tag">Power BI</span><span class="xp-tag">CRM</span><span class="xp-tag">ServiceNow</span></div></div>
-      </div>
-      <div class="xp-item reveal">
-        <div class="xp-left"><span class="xp-type">IT</span><span class="xp-period">Oct 2024 — May 2025</span><span class="xp-co">Tech Domain</span><span class="xp-loc">Adelaide, SA</span></div>
-        <div class="xp-right"><div class="xp-role">IT Network Technician</div><ul class="xp-bullets"><li>Configure, monitor, and maintain routers, switches, VLANs, and VPNs for secure, reliable connectivity.</li><li>Technical support for Windows and Linux users, meeting strict SLAs.</li><li>Implement system upgrades and migrations with minimal downtime; document and escalate complex cases.</li></ul><div class="xp-tags"><span class="xp-tag">VLANs</span><span class="xp-tag">VPN</span><span class="xp-tag">Windows</span><span class="xp-tag">Linux</span><span class="xp-tag">SLA</span></div></div>
-      </div>
-      <div class="xp-item reveal">
-        <div class="xp-left"><span class="xp-type">Leadership</span><span class="xp-period">Nov 2023 — Nov 2025</span><span class="xp-co">Woolworths Supermarkets</span><span class="xp-loc">Adelaide, SA</span></div>
-        <div class="xp-right"><div class="xp-role">Team Supervisor, Store Trade</div><ul class="xp-bullets"><li>Supervised daily store operations across customer service and online fulfilment, ensuring smooth order processing.</li><li>Managed team rosters, trained and mentored new staff on procedures and standards.</li></ul><div class="xp-tags"><span class="xp-tag">Leadership</span><span class="xp-tag">Operations</span><span class="xp-tag">Mentoring</span></div></div>
-      </div>
-      <div class="xp-item reveal">
-        <div class="xp-left"><span class="xp-type">Leadership</span><span class="xp-period">Nov 2022 — Feb 2023</span><span class="xp-co">Myer Pty Ltd</span><span class="xp-loc">Sydney, NSW</span></div>
-        <div class="xp-right"><div class="xp-role">Team Leader, Customer Fulfilment</div><ul class="xp-bullets"><li>Led and mentored 110+ staff, boosting productivity by 20% through streamlined shift operations.</li><li>Managed rosters, prepared performance reports, and supported continuous improvement initiatives.</li></ul><div class="xp-tags"><span class="xp-tag">110+ Team</span><span class="xp-tag">+20% Productivity</span><span class="xp-tag">Operations</span></div></div>
-      </div>
-      <div class="xp-item reveal">
-        <div class="xp-left"><span class="xp-type">IT Support</span><span class="xp-period">Jul 2019 — Nov 2020</span><span class="xp-co">Empire Technologies</span><span class="xp-loc">Sydney, NSW</span></div>
-        <div class="xp-right"><div class="xp-role">IT Support Technician</div><ul class="xp-bullets"><li>Front-line support for walk-in customers — laptops, desktops, and mobile devices.</li><li>Windows installations, data backups, virus removal, hardware repairs, and software troubleshooting.</li></ul><div class="xp-tags"><span class="xp-tag">Hardware</span><span class="xp-tag">Windows</span><span class="xp-tag">Customer Support</span></div></div>
-      </div>
-      <div class="xp-item reveal">
-        <div class="xp-left"><span class="xp-type">Internship</span><span class="xp-period">Aug 2018 — Apr 2019</span><span class="xp-co">TA Software Solutions</span><span class="xp-loc">Kuala Lumpur, MY</span></div>
-        <div class="xp-right"><div class="xp-role">IT Intern</div><ul class="xp-bullets"><li>Contributed to CMS development — software analysis, bug identification, and performance testing.</li><li>Created detailed bug reports and analyses, accelerating issue resolution and system stability.</li></ul><div class="xp-tags"><span class="xp-tag">CMS</span><span class="xp-tag">QA Testing</span><span class="xp-tag">Bug Reports</span></div></div>
-      </div>
+  <section class="sec" id="experience">
+    <div class="s-eye">06 — experience</div>
+    <h2 class="s-title">Work History</h2>
+    <div class="xp-wrap">
+      <div class="xp-item rv"><div class="xp-left"><span class="xp-type">Current</span><span class="xp-period">Apr 2025 – Present</span><span class="xp-co">Hoshizaki Lancer</span><span class="xp-loc">Adelaide, SA</span></div><div class="xp-right"><div class="xp-role">Customer &amp; Systems Support Coordinator</div><ul class="xp-ul"><li>Support Infor LN ERP, Power BI and CRM for clients including Coca-Cola, McDonald's and Asahi Beverages.</li><li>Troubleshoot system issues, manage ERP workflows and escalate unresolved errors to IT specialists.</li><li>Helped reduce manual errors by improving ERP automation and data validation processes.</li></ul><div class="xp-tags"><span class="xp-tag">Infor LN</span><span class="xp-tag">Power BI</span><span class="xp-tag">CRM</span><span class="xp-tag">ServiceNow</span></div></div></div>
+      <div class="xp-item rv"><div class="xp-left"><span class="xp-type">IT</span><span class="xp-period">Oct 2024 – May 2025</span><span class="xp-co">Tech Domain</span><span class="xp-loc">Adelaide, SA</span></div><div class="xp-right"><div class="xp-role">IT Network Technician</div><ul class="xp-ul"><li>Configured and maintained routers, switches, VLANs and VPNs.</li><li>Provided Windows and Linux technical support within SLA timeframes.</li><li>Assisted with system upgrades and migrations with minimal downtime.</li></ul><div class="xp-tags"><span class="xp-tag">VLANs</span><span class="xp-tag">VPN</span><span class="xp-tag">Windows</span><span class="xp-tag">Linux</span></div></div></div>
+      <div class="xp-item rv"><div class="xp-left"><span class="xp-type">Leadership</span><span class="xp-period">Nov 2023 – Nov 2025</span><span class="xp-co">Woolworths</span><span class="xp-loc">Adelaide, SA</span></div><div class="xp-right"><div class="xp-role">Team Supervisor</div><ul class="xp-ul"><li>Supervised daily store trade and online fulfilment operations.</li><li>Managed rosters, resolved escalations and trained new staff members.</li></ul><div class="xp-tags"><span class="xp-tag">Leadership</span><span class="xp-tag">Operations</span><span class="xp-tag">Training</span></div></div></div>
+      <div class="xp-item rv"><div class="xp-left"><span class="xp-type">Leadership</span><span class="xp-period">Nov 2022 – Feb 2023</span><span class="xp-co">Myer Pty Ltd</span><span class="xp-loc">Sydney, NSW</span></div><div class="xp-right"><div class="xp-role">Team Leader — Customer Fulfilment</div><ul class="xp-ul"><li>Led 110+ staff, improving shift productivity by 20% through better workflows.</li><li>Prepared performance reports and supported continuous improvement initiatives.</li></ul><div class="xp-tags"><span class="xp-tag">110+ Team</span><span class="xp-tag">+20% Output</span><span class="xp-tag">Reporting</span></div></div></div>
+      <div class="xp-item rv"><div class="xp-left"><span class="xp-type">IT Support</span><span class="xp-period">Jul 2019 – Nov 2020</span><span class="xp-co">Empire Technologies</span><span class="xp-loc">Sydney, NSW</span></div><div class="xp-right"><div class="xp-role">IT Support Technician</div><ul class="xp-ul"><li>Walk-in support for laptops, desktops and mobile devices.</li><li>Windows installs, data backups, virus removal and hardware repairs.</li></ul><div class="xp-tags"><span class="xp-tag">Hardware</span><span class="xp-tag">Windows</span><span class="xp-tag">Support</span></div></div></div>
+      <div class="xp-item rv"><div class="xp-left"><span class="xp-type">Intern</span><span class="xp-period">Aug 2018 – Apr 2019</span><span class="xp-co">TA Software Solutions</span><span class="xp-loc">Kuala Lumpur, MY</span></div><div class="xp-right"><div class="xp-role">IT Intern</div><ul class="xp-ul"><li>CMS software analysis, bug identification and performance testing.</li><li>Wrote bug reports and analyses to help the dev team resolve issues faster.</li></ul><div class="xp-tags"><span class="xp-tag">CMS</span><span class="xp-tag">QA</span><span class="xp-tag">Bug Reports</span></div></div></div>
     </div>
   </section>
 
   <!-- PROJECT -->
-  <section class="section" id="project">
-    <div class="sec-eyebrow">07 — Academic Project</div>
-    <h2 class="sec-title">Featured Work</h2>
-    <div class="project-card reveal">
+  <section class="sec" id="project">
+    <div class="s-eye">07 — project</div>
+    <h2 class="s-title">Featured Work</h2>
+    <div class="proj-card rv sc">
       <div class="proj-body">
         <div class="proj-badge">Academic Project · 2024</div>
-        <div class="proj-title">Teaching &amp; Grading System — Adelaide Japanese Community School</div>
-        <p class="proj-desc">Developed a custom web-based teaching and grading system for SACE courses. Teachers can manage assignments, input scores, provide feedback, and generate reports. Students can view grades and submission statuses in real time. The system streamlined grading workflows and enhanced teacher–student communication across the school.</p>
+        <div class="proj-ttl">Teaching &amp; Grading System — Adelaide Japanese Community School</div>
+        <p class="proj-desc">Built a web-based grading platform for SACE courses. Teachers manage assignments, enter scores, give feedback and generate reports. Students check grades and submission statuses online. Improved how the school handles grading and made communication between teachers and students much smoother.</p>
       </div>
       <div class="proj-stack">
-        <div class="stack-label">Tech Stack</div>
-        <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">PHP &amp; JavaScript</div><div class="stack-detail">Backend logic &amp; dynamic UI</div></div></div>
-        <div class="stack-item"><div class="stack-dot c2"></div><div><div class="stack-name">HTML &amp; CSS</div><div class="stack-detail">Frontend structure &amp; styling</div></div></div>
-        <div class="stack-item"><div class="stack-dot c3"></div><div><div class="stack-name">SQL Database</div><div class="stack-detail">Data encryption &amp; access controls</div></div></div>
-        <div class="stack-item"><div class="stack-dot"></div><div><div class="stack-name">GitHub</div><div class="stack-detail">Version control &amp; collaboration</div></div></div>
+        <div class="ps-lbl">// tech stack</div>
+        <div class="ps-item"><div class="ps-dot g"></div><div><div class="ps-name">PHP &amp; JavaScript</div><div class="ps-desc">Backend logic + dynamic UI</div></div></div>
+        <div class="ps-item"><div class="ps-dot b"></div><div><div class="ps-name">HTML &amp; CSS</div><div class="ps-desc">Frontend structure &amp; styling</div></div></div>
+        <div class="ps-item"><div class="ps-dot p"></div><div><div class="ps-name">SQL Database</div><div class="ps-desc">Encrypted data + access controls</div></div></div>
+        <div class="ps-item"><div class="ps-dot o"></div><div><div class="ps-name">GitHub</div><div class="ps-desc">Version control &amp; collaboration</div></div></div>
       </div>
     </div>
   </section>
 
   <!-- CERTS -->
-  <section class="section" id="certs">
-    <div class="sec-eyebrow">08 — Certifications &amp; Training</div>
-    <h2 class="sec-title">Credentials</h2>
+  <section class="sec" id="certs">
+    <div class="s-eye">08 — certifications</div>
+    <h2 class="s-title">Credentials</h2>
     <div class="cert-grid">
-      <div class="cert-item reveal"><div class="cert-diamond"></div><span class="cert-name">CCNA 2020: Networking Components</span></div>
-      <div class="cert-item reveal"><div class="cert-diamond"></div><span class="cert-name">Certificate in Graphic Design</span></div>
-      <div class="cert-item reveal"><div class="cert-diamond"></div><span class="cert-name">Ethics and Project Management</span></div>
-      <div class="cert-item reveal"><div class="cert-diamond"></div><span class="cert-name">Developing a Continuous Learning Mindset</span></div>
-      <div class="cert-item reveal"><div class="cert-diamond"></div><span class="cert-name">Enabling Strategic Business-IT Alignment</span></div>
-      <div class="cert-item reveal"><div class="cert-diamond"></div><span class="cert-name">ACS ICT Professional Year Program</span></div>
+      <div class="cert-card rv"><span class="cert-ico">🔌</span><span class="cert-name">CCNA 2020: Networking Components</span></div>
+      <div class="cert-card rv"><span class="cert-ico">🎨</span><span class="cert-name">Certificate in Graphic Design</span></div>
+      <div class="cert-card rv"><span class="cert-ico">📋</span><span class="cert-name">Ethics and Project Management</span></div>
+      <div class="cert-card rv"><span class="cert-ico">🧠</span><span class="cert-name">Developing a Continuous Learning Mindset</span></div>
+      <div class="cert-card rv"><span class="cert-ico">🤝</span><span class="cert-name">Enabling Strategic Business-IT Alignment</span></div>
+      <div class="cert-card rv"><span class="cert-ico">🏅</span><span class="cert-name">ACS ICT Professional Year — Completed ✓</span></div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section class="section" id="contact">
-    <div class="sec-eyebrow">09 — Contact</div>
-    <h2 class="sec-title">Get In Touch</h2>
-    <div class="contact-wrap">
-      <div class="reveal">
-        <h3 class="contact-headline">Let's build<br>something <span>reliable.</span></h3>
-        <p class="contact-body">Open to full-time IT roles, contract work, and technical consultations across Adelaide and beyond. Whether you need a network technician, systems support specialist, or reliable IT partner — I'd love to connect.</p>
-        <a href="mailto:shoikot.dhk@gmail.com" class="contact-cta">Send an email →</a>
+  <section class="sec" id="contact">
+    <div class="s-eye">09 — contact</div>
+    <h2 class="s-title">Get In Touch</h2>
+    <div class="contact-grid">
+      <div class="rv lft">
+        <h3 class="c-hl">Let's talk<br><span class="grd">IT.</span></h3>
+        <p class="c-body">I'm open to graduate IT roles, support positions, and opportunities to join a good team in Adelaide. If you think I'd be a great fit, I'd love to hear from you.</p>
+        <a href="mailto:shoikot.dhk@gmail.com" class="c-btn"><span>✉ Send an email →</span></a>
       </div>
-      <div class="contact-rows reveal">
-        <div class="contact-row"><span class="cr-label">Phone</span><span class="cr-val">+61 475 863 581</span></div>
-        <div class="contact-row"><span class="cr-label">Email</span><span class="cr-val">shoikot.dhk@gmail.com</span></div>
-        <div class="contact-row"><span class="cr-label">Location</span><span class="cr-val">Adelaide, SA 5108</span></div>
-        <div class="contact-row"><span class="cr-label">LinkedIn</span><span class="cr-val">linkedin.com/in/mdharashed</span></div>
-        <div class="contact-row"><span class="cr-label">Status</span><span class="cr-val hi">Open to Opportunities</span></div>
+      <div class="c-rows rv">
+        <div class="crow"><div class="crow-ico">✉</div><div><span class="crow-lbl">Email</span><span class="crow-val">shoikot.dhk@gmail.com</span></div></div>
+        <div class="crow"><div class="crow-ico">📍</div><div><span class="crow-lbl">Location</span><span class="crow-val">Adelaide, SA 5108</span></div></div>
+        <div class="crow"><div class="crow-ico">💼</div><div><span class="crow-lbl">LinkedIn</span><span class="crow-val">linkedin.com/in/mdharashed</span></div></div>
+        <div class="crow"><div class="crow-ico">🌐</div><div><span class="crow-lbl">Portfolio</span><span class="crow-val">mrashed17.github.io/portfolio</span></div></div>
+        <div class="crow"><div class="crow-ico">🟢</div><div><span class="crow-lbl">Status</span><span class="crow-val hi">Open to Roles</span></div></div>
       </div>
     </div>
   </section>
 
-  <footer class="pg-footer">
-    <p>&copy; 2025 <span>Mohammad Rashed</span> — IT Professional</p>
-    <p>Adelaide, South Australia</p>
+  <footer class="pg-foot">
+    <p>&copy; 2025 <span class="hl">Mohammad Rashed</span> — IT Professional · Adelaide, SA</p>
+    <p>Built with curiosity &amp; late nights</p>
   </footer>
-</div>
+
+</div><!-- /.main -->
 
 <script>
-  let cur=0;
-  const slides=document.querySelectorAll('.slide');
-  const dots=document.querySelectorAll('.slide-dot');
-  const prog=document.getElementById('sprogress');
-  let timer;
+/* ── CURSOR ── */
+const cur = document.getElementById('cur');
+const ring = document.getElementById('cur-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
 
-  function goSlide(n){
-    slides[cur].classList.remove('active');
-    dots[cur].classList.remove('active');
-    cur=(n+slides.length)%slides.length;
-    slides[cur].classList.add('active');
-    dots[cur].classList.add('active');
-    prog.classList.remove('running');
-    prog.style.width='0';
-    void prog.offsetWidth;
-    prog.classList.add('running');
-  }
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cur.style.left = mx + 'px';
+  cur.style.top = my + 'px';
+});
 
-  function nextSlide(){goSlide(cur+1);resetAuto()}
-  function prevSlide(){goSlide(cur-1);resetAuto()}
-  function resetAuto(){clearInterval(timer);timer=setInterval(()=>goSlide(cur+1),5000)}
+(function animRing() {
+  rx += (mx - rx) * 0.13;
+  ry += (my - ry) * 0.13;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animRing);
+})();
 
-  goSlide(0);resetAuto();
+const hovEls = document.querySelectorAll('a, button, .tcard, .cert-card, .sc, .hs, .crow, .xp-item, .edu-item, .atag');
+hovEls.forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
+});
 
-  const navLinks=document.querySelectorAll('.sb-nav a');
-  const allSecs=document.querySelectorAll('section[id],.slider[id]');
-  const navObs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        navLinks.forEach(a=>a.classList.remove('active'));
-        const lnk=document.querySelector(`.sb-nav a[href="#${e.target.id}"]`);
-        if(lnk)lnk.classList.add('active');
-      }
-    });
-  },{threshold:.35});
-  allSecs.forEach(s=>navObs.observe(s));
+/* ── 3D TILT ON EXPERTISE CARDS ── */
+document.querySelectorAll('.tcard').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform = `perspective(700px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) scale(1.02)`;
+    const spot = card.querySelector('.spot');
+    if (spot) {
+      spot.style.left = (e.clientX - r.left) + 'px';
+      spot.style.top = (e.clientY - r.top) + 'px';
+    }
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
 
-  const reveals=document.querySelectorAll('.reveal');
-  const revObs=new IntersectionObserver(entries=>{
-    entries.forEach((e,i)=>{
-      if(e.isIntersecting){
-        e.target.style.transitionDelay=`${(i%5)*70}ms`;
-        e.target.classList.add('in');
-        revObs.unobserve(e.target);
-      }
-    });
-  },{threshold:.1});
-  reveals.forEach(el=>revObs.observe(el));
+/* ── SLIDER ── */
+let curSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.v-dot');
+const prog = document.getElementById('sprog');
+let sliderTimer;
 
-  const skillBlocks=document.querySelectorAll('.skill-block');
-  const skillObs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        const fill=e.target.querySelector('.skill-fill');
-        if(fill)fill.style.width=e.target.dataset.pct+'%';
-        skillObs.unobserve(e.target);
-      }
-    });
-  },{threshold:.3});
-  skillBlocks.forEach(b=>skillObs.observe(b));
+function goSlide(n) {
+  slides[curSlide].classList.remove('active');
+  dots[curSlide].classList.remove('active');
+  curSlide = (n + slides.length) % slides.length;
+  slides[curSlide].classList.add('active');
+  dots[curSlide].classList.add('active');
+  prog.classList.remove('go');
+  prog.style.width = '0';
+  void prog.offsetWidth; // force reflow
+  prog.classList.add('go');
+}
+
+function nextSlide() { goSlide(curSlide + 1); resetAuto(); }
+function prevSlide() { goSlide(curSlide - 1); resetAuto(); }
+function resetAuto() {
+  clearInterval(sliderTimer);
+  sliderTimer = setInterval(() => goSlide(curSlide + 1), 5000);
+}
+
+goSlide(0);
+resetAuto();
+
+/* ── ACTIVE NAV ON SCROLL ── */
+const navLinks = document.querySelectorAll('.sb-nav a');
+const sections = document.querySelectorAll('.slider, .sec');
+
+const navObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const link = document.querySelector(`.sb-nav a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { threshold: 0.35 });
+
+sections.forEach(s => navObs.observe(s));
+
+/* ── SCROLL REVEAL ── */
+const rvEls = document.querySelectorAll('.rv');
+const rvObs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      e.target.style.transitionDelay = (i % 6) * 75 + 'ms';
+      e.target.classList.add('in');
+      rvObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+rvEls.forEach(el => rvObs.observe(el));
+
+/* ── TITLE UNDERLINE ── */
+const titObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('lit'); });
+}, { threshold: 0.5 });
+document.querySelectorAll('.s-title').forEach(t => titObs.observe(t));
+
+/* ── SKILL BARS ── */
+const skObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const fill = e.target.querySelector('.sk-fill');
+      if (fill) fill.style.width = e.target.dataset.pct + '%';
+      skObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.sk').forEach(s => skObs.observe(s));
 </script>
 </body>
 </html>
